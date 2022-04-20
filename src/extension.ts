@@ -1,13 +1,14 @@
 import * as vscode from "vscode";
+import { SidebarProvider } from "./sibaBar";
 
 export function activate(context: vscode.ExtensionContext) {
-  //   const sidebarProvider = new SidebarProvider(context.extensionUri);
-  //   context.subscriptions.push(
-  //     vscode.window.registerWebviewViewProvider(
-  //       "grpc-rocket-sidebar",
-  //       sidebarProvider
-  //     )
-  //   );
+  const sidebarProvider = new SidebarProvider(context.extensionUri);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      "grpc-rocket-sidebar",
+      sidebarProvider
+    )
+  );
   let disposable = vscode.commands.registerCommand(
     "grpc-rocket.helloWorld",
     () => {
