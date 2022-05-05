@@ -16,34 +16,24 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: Scaffold(
-        body: MultiSplitView(
-          dividerBuilder:
-              (axis, index, resizable, dragging, highlighted, themeData) {
-            return Container(
-              color: dragging ? Colors.grey[300] : Colors.grey[100],
-              child: Icon(
-                Icons.drag_indicator,
-                color: highlighted ? Colors.grey[600] : Colors.grey[400],
-              ),
-            );
-          },
-          children: [
-            Container(
-              color: Colors.black,
+        body: MultiSplitViewTheme(
+          data: MultiSplitViewThemeData(
+            dividerPainter: DividerPainters.background(
+              color: Colors.grey[200],
+              highlightedColor: Colors.grey[800],
             ),
-            Container(
-              color: Colors.blueGrey,
-            )
-          ],
-          initialAreas: [
-            Area(
-              weight: 0.20,
-              minimalSize: 272,
-            ),
-            Area(
-              minimalSize: 920,
-            ),
-          ],
+            dividerThickness: 9,
+          ),
+          child: MultiSplitView(
+            initialAreas: [
+              Area(weight: 0.20, minimalSize: 272),
+              Area(minimalSize: 920),
+            ],
+            children: [
+              Container(),
+              Container(),
+            ],
+          ),
         ),
       ),
     );
