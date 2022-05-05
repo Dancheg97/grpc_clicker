@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_split_view/multi_split_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +13,39 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
-      home: const Scaffold(),
+      home: Scaffold(
+        body: MultiSplitView(
+          dividerBuilder:
+              (axis, index, resizable, dragging, highlighted, themeData) {
+            return Container(
+              color: dragging ? Colors.grey[300] : Colors.grey[100],
+              child: Icon(
+                Icons.drag_indicator,
+                color: highlighted ? Colors.grey[600] : Colors.grey[400],
+              ),
+            );
+          },
+          children: [
+            Container(
+              color: Colors.black,
+            ),
+            Container(
+              color: Colors.blueGrey,
+            )
+          ],
+          initialAreas: [
+            Area(
+              weight: 0.20,
+              minimalSize: 272,
+            ),
+            Area(
+              minimalSize: 920,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
