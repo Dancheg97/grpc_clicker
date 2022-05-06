@@ -16,15 +16,19 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
+        dividerTheme: DividerThemeData(
+          color: Colors.blueGrey[200],
+          thickness: 3,
+        ),
       ),
       home: Scaffold(
         body: MultiSplitViewTheme(
           data: MultiSplitViewThemeData(
             dividerPainter: DividerPainters.background(
-              color: Colors.grey[200],
-              highlightedColor: Colors.grey[800],
+              color: Colors.blueGrey[200],
+              highlightedColor: Colors.blueGrey[500],
             ),
-            dividerThickness: 7,
+            dividerThickness: 4,
           ),
           child: MultiSplitView(
             initialAreas: [
