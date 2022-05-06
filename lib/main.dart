@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grpc_rocket/navigator/frame.dart';
+import 'package:grpc_rocket/request/frame.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 
 void main() {
@@ -29,9 +31,9 @@ class MyApp extends StatelessWidget {
               Area(weight: 0.20, minimalSize: 272),
               Area(minimalSize: 920),
             ],
-            children: [
-              Container(),
-              Container(),
+            children: const [
+              NavigatorFrame(),
+              RequstFrame(),
             ],
           ),
         ),
