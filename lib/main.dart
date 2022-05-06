@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               color: Colors.grey[200],
               highlightedColor: Colors.grey[800],
             ),
-            dividerThickness: 9,
+            dividerThickness: 7,
           ),
           child: MultiSplitView(
             initialAreas: [
