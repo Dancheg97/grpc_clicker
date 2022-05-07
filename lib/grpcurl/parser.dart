@@ -2,6 +2,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+Future<bool> checkProto(String path) async {
+  return true;
+}
+
 Future<bool> addNewProto() async {
   try {
     var result = await FilePicker.platform.pickFiles(
@@ -10,19 +14,25 @@ Future<bool> addNewProto() async {
     );
     var prefs = await SharedPreferences.getInstance();
     var protos = prefs.getStringList('proto_file_pathes')!;
-    for (var element in result!.paths) {
+    for (var protoPath in result!.paths) {
       if (kDebugMode) {
-        print(element);
+        print(protoPath);
       }
-      protos.add(element!);
+      protos.add(protoPath!);
+      var checked = await checkProto(protoPath);
+      if (!checked) {
+        throw Error();
+      }
     }
-    // TODO show good response
+    var saved = await prefs.setStringList('proto_file_pathes', protos);
+    if (!saved) {
+      throw Error();
+    }
     return true;
   } catch (e) {
     if (kDebugMode) {
       print(e);
     }
-    // TODO show bad response
     return false;
   }
 }

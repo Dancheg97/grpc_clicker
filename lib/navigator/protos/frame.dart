@@ -23,7 +23,12 @@ class _ProtosTabState extends State<ProtosTab> {
     if (protos.isEmpty) {
       setState(() {
         prototab = AddProto(
-          onUpdate: loadProtos(),
+          onPressed: () async {
+            var updated = await addNewProto();
+            if (updated) {
+              loadProtos();
+            }
+          },
         );
       });
       return;
@@ -34,6 +39,11 @@ class _ProtosTabState extends State<ProtosTab> {
         protoPath: protoPath,
       ));
     }
+    setState(() {
+      prototab = Column(
+        children: protosList,
+      );
+    });
   }
 
   @override
@@ -49,21 +59,18 @@ class _ProtosTabState extends State<ProtosTab> {
 }
 
 class AddProto extends StatelessWidget {
-  final Function onUpdate;
-  AddProto({
+  final Function onPressed;
+  const AddProto({
     Key? key,
-    required this.onUpdate,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        onPressed: () async {
-          var updated = await addNewProto();
-          if (updated) {
-            onUpdate();
-          }
+        onPressed: () {
+          onPressed();
         },
         child: Padding(
           padding: const EdgeInsets.all(4.0),
