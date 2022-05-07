@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,10 +14,10 @@ class _ProtosTabState extends State<ProtosTab> {
 
   loadProtos() async {
     var prefs = await SharedPreferences.getInstance();
-    var protos = prefs.getStringList('protos');
+    var protos = prefs.getStringList('proto_file_pathes');
     if (protos == null) {
       protos = [];
-      prefs.setStringList('protos', []);
+      prefs.setStringList('proto_file_pathes', []);
     }
     if (protos.isEmpty) {
       setState(() {
@@ -44,8 +45,7 @@ class AddProto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        onPressed: () {
-          
+        onPressed: () async {
         },
         child: Padding(
           padding: const EdgeInsets.all(4.0),
