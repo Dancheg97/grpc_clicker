@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class InitialProto extends StatelessWidget {
-  final String text;
-  const InitialProto({
+class ProtoDefinition extends StatelessWidget {
+  final String protoPath;
+  const ProtoDefinition({
     Key? key,
-    required this.text,
+    required this.protoPath,
   }) : super(key: key);
 
   @override

@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:grpc_rocket/grpcurl/parser.dart';
+import 'package:grpc_rocket/navigator/protos/proto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProtosTab extends StatefulWidget {
@@ -21,8 +22,17 @@ class _ProtosTabState extends State<ProtosTab> {
     }
     if (protos.isEmpty) {
       setState(() {
-        prototab = const AddProto();
+        prototab = AddProto(
+          onUpdate: loadProtos(),
+        );
       });
+      return;
+    }
+    List<Widget> protosList = [];
+    for (var protoPath in protos) {
+      protosList.add(ProtoDefinition(
+        protoPath: protoPath,
+      ));
     }
   }
 
@@ -39,13 +49,21 @@ class _ProtosTabState extends State<ProtosTab> {
 }
 
 class AddProto extends StatelessWidget {
-  const AddProto({Key? key}) : super(key: key);
+  final Function onUpdate;
+  AddProto({
+    Key? key,
+    required this.onUpdate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
         onPressed: () async {
+          var updated = await addNewProto();
+          if (updated) {
+            onUpdate();
+          }
         },
         child: Padding(
           padding: const EdgeInsets.all(4.0),
