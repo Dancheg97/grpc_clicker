@@ -1,12 +1,13 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:grpc_rocket/dialog/show.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> checkProto(String path) async {
-  return true;
+  return false;
 }
 
-Future<bool> addNewProto() async {
+Future<bool> addNewProto(context) async {
   try {
     var result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -21,15 +22,18 @@ Future<bool> addNewProto() async {
       protos.add(protoPath!);
       var checked = await checkProto(protoPath);
       if (!checked) {
-        throw Error();
+        showNotification(context, NotificationType.protoParseError);
+        return false;
       }
     }
     var saved = await prefs.setStringList('proto_file_pathes', protos);
     if (!saved) {
       throw Error();
     }
+    showNotification(context, NotificationType.protoSaved);
     return true;
   } catch (e) {
+    showNotification(context, NotificationType.protoSaveError);
     if (kDebugMode) {
       print(e);
     }

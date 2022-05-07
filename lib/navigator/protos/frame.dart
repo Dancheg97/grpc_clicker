@@ -24,7 +24,7 @@ class _ProtosTabState extends State<ProtosTab> {
       setState(() {
         prototab = AddProto(
           onPressed: () async {
-            var updated = await addNewProto();
+            var updated = await addNewProto(context);
             if (updated) {
               loadProtos();
             }
