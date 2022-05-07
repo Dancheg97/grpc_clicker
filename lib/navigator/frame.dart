@@ -14,7 +14,7 @@ class NavigatorFrame extends StatelessWidget {
             toolbarHeight: 0,
             bottom: const TabBar(
               tabs: [
-                CustomTab(text: "API's"),
+                CustomTab(text: "protos"),
                 CustomTab(text: "history"),
                 CustomTab(text: "tests"),
               ],
