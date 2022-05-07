@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grpc_rocket/navigator/history/history.dart';
+import 'package:grpc_rocket/navigator/protos/frame.dart';
+import 'package:grpc_rocket/navigator/tests/tests.dart';
 
 class NavigatorFrame extends StatelessWidget {
   const NavigatorFrame({Key? key}) : super(key: key);
@@ -23,9 +26,9 @@ class NavigatorFrame extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Icon(Icons.directions_car),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
+            ProtosTab(),
+            HistoryTab(),
+            TestsTab(),
           ],
         ),
       ),
