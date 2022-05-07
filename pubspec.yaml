@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   multi_split_view: ^2.0.0
   shared_preferences: ^2.0.13
+  awesome_dialog: ^2.2.1
   
 
 dev_dependencies:

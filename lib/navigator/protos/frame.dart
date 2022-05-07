@@ -44,14 +44,16 @@ class AddProto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          
+        },
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: const [
               Icon(Icons.add),
-              Text('add proto file'),
+              Text('add new proto'),
             ],
           ),
         ),
