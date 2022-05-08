@@ -7,8 +7,18 @@ class RequstFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        AdressPanel(),
+      children: [
+        Row(
+          children: [
+            const Flexible(
+              child: AdressPanel(),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.send_rounded),
+            )
+          ],
+        ),
       ],
     );
   }
