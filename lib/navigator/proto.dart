@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/grpcurl/add.dart';
-import 'package:grpc_rocket/navigator/proto_widget.dart';
+import 'package:grpc_rocket/grpcurl/parse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProtosTab extends StatefulWidget {
@@ -12,6 +14,38 @@ class ProtosTab extends StatefulWidget {
 
 class _ProtosTabState extends State<ProtosTab> {
   Widget prototab = Container();
+
+  Widget current = Container();
+
+  Widget getHead(String path) {
+    return ProtoHead(name: path.split(Platform.pathSeparator).last);
+  }
+
+  Future<Widget> getProto(String path) async {
+    List<Widget> elems = [];
+    elems.add(const Divider());
+    elems.add(getHead(path));
+    var services = await parseProto(context, path);
+    for (var service in services) {
+      elems.add(const Divider());
+      elems.add(ProtoTile(
+        name: service.name,
+        icon: Icons.account_tree_rounded,
+        indent: 0,
+      ));
+      for (var method in service.methods) {
+        elems.add(ProtoTile(
+          name: method.name,
+          icon: Icons.send_rounded,
+          indent: 8,
+        ));
+      }
+    }
+    return Column(
+      children: elems,
+      mainAxisSize: MainAxisSize.min,
+    );
+  }
 
   loadProtos() async {
     var prefs = await SharedPreferences.getInstance();
@@ -35,9 +69,7 @@ class _ProtosTabState extends State<ProtosTab> {
     }
     List<Widget> protosList = [];
     for (var protoPath in protos) {
-      protosList.add(ProtoDefinition(
-        protoPath: protoPath,
-      ));
+      protosList.add(await getProto(protoPath));
     }
     protosList.add(Padding(
       padding: const EdgeInsets.all(8.0),
@@ -100,6 +132,57 @@ class AddProto extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ProtoTile extends StatelessWidget {
+  final String name;
+  final IconData icon;
+  final double indent;
+  const ProtoTile({
+    Key? key,
+    required this.name,
+    required this.icon,
+    required this.indent,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 24,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(width: indent),
+          Icon(
+            icon,
+            size: 14,
+            color: Colors.blueGrey[500],
+          ),
+          const SizedBox(width: 6),
+          Text(name),
+        ],
+      ),
+    );
+  }
+}
+
+class ProtoHead extends StatelessWidget {
+  final String name;
+  const ProtoHead({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        name,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

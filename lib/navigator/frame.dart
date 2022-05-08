@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/navigator/history_frame.dart';
-import 'package:grpc_rocket/navigator/proto_frame.dart';
+import 'package:grpc_rocket/navigator/proto.dart';
 import 'package:grpc_rocket/navigator/tests_frame.dart';
 
 class NavigatorFrame extends StatelessWidget {
