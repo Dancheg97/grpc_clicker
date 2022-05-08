@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/dialog/show.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,34 @@ class _AdressPanelState extends State<AdressPanel> {
     showNotification(context, NotificationType.adressSaved);
   }
 
-  loadAdress() {}
+  loadAdress() async {
+    var prefs = await SharedPreferences.getInstance();
+    var adresses = prefs.getStringList('adresses') ?? [];
+    List<Widget> buttons = [];
+    buttons.add(Text(
+      'Choose adress to load',
+      style: Theme.of(context).textTheme.titleMedium,
+    ));
+    for (var adress in adresses) {
+      buttons.add(AdressButton(
+        text: adress,
+        controller: controller,
+      ));
+    }
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.NO_HEADER,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: buttons,
+        ),
+      ),
+      width: dialogWidth,
+      showCloseIcon: showCloseIcon,
+    ).show();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +93,35 @@ class _AdressPanelState extends State<AdressPanel> {
           var prefs = await SharedPreferences.getInstance();
           prefs.setString('adress', text);
         },
+      ),
+    );
+  }
+}
+
+class AdressButton extends StatelessWidget {
+  final String text;
+  final TextEditingController controller;
+  const AdressButton({
+    Key? key,
+    required this.text,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
+      child: TextButton(
+        onPressed: () {
+          controller.text = text;
+          Navigator.pop(context);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(text),
+          ],
+        ),
       ),
     );
   }
