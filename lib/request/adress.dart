@@ -33,9 +33,12 @@ class _AdressPanelState extends State<AdressPanel> {
     var prefs = await SharedPreferences.getInstance();
     var adresses = prefs.getStringList('adresses') ?? [];
     List<Widget> buttons = [];
-    buttons.add(Text(
-      'Choose adress to load',
-      style: Theme.of(context).textTheme.titleMedium,
+    buttons.add(Padding(
+      padding: const EdgeInsets.fromLTRB(2, 6, 2, 16),
+      child: Text(
+        'Choose adress to load',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
     ));
     for (var adress in adresses) {
       buttons.add(AdressButton(
@@ -65,7 +68,7 @@ class _AdressPanelState extends State<AdressPanel> {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          hintText: 'service adress',
+          hintText: 'Pick adress',
           contentPadding: const EdgeInsets.all(15),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
@@ -181,7 +184,10 @@ class RemovableAdressButton extends StatelessWidget {
               fold();
             },
             color: Theme.of(context).hintColor,
-            icon: const Icon(Icons.delete),
+            icon: const Icon(
+              Icons.delete,
+              size: 18,
+            ),
           )
         ],
       ),
