@@ -15,7 +15,7 @@ class _AdressPanelState extends State<AdressPanel> {
   saveAdress() async {
     var prefs = await SharedPreferences.getInstance();
     var adresses = prefs.getStringList('adresses') ?? [];
-    if (controller.text != "") {
+    if (controller.text == "") {
       showNotification(context, NotificationType.adressEmpty);
       return;
     }
