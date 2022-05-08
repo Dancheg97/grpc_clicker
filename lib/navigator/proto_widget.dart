@@ -15,10 +15,16 @@ class ProtoDefinition extends StatefulWidget {
 class _ProtoDefinitionState extends State<ProtoDefinition> {
   Widget current = Container();
 
+  Widget getHead(String path) {
+    return ProtoHead(name: path.split("/").last);
+  }
+
   loadProto() async {
     List<Widget> elems = [];
+    elems.add(getHead(widget.protoPath));
     var services = await parseProto(context, widget.protoPath);
     for (var service in services) {
+      elems.add(const Divider());
       elems.add(ProtoTile(
         name: service.name,
         icon: Icons.account_tree_rounded,
@@ -75,13 +81,39 @@ class ProtoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(width: indent),
-        Icon(icon),
-        Text(name),
-      ],
+    return SizedBox(
+      height: 24,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(width: indent),
+          Icon(
+            icon,
+            size: 12,
+          ),
+          const SizedBox(width: 6),
+          Text(name),
+        ],
+      ),
+    );
+  }
+}
+
+class ProtoHead extends StatelessWidget {
+  final String name;
+  const ProtoHead({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        name,
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
     );
   }
 }
