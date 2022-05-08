@@ -11,6 +11,7 @@ class ResponsePane extends StatelessWidget {
       child: Container(
         color: Colors.red,
         height: 111,
+        width: 111,
       ),
     );
   }

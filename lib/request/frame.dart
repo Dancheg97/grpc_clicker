@@ -21,16 +21,19 @@ class RequstFrame extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: const [
-            RequestPane(
-              adress: '',
-              message: '',
-              service: '',
+        Expanded(
+          child: IntrinsicHeight(
+            child: Row(
+              children: const [
+                RequestPane(),
+                VerticalDivider(
+                  indent: 15,
+                  endIndent: 15,
+                ),
+                ResponsePane(),
+              ],
             ),
-            VerticalDivider(),
-            ResponsePane(),
-          ],
+          ),
         ),
       ],
     );
