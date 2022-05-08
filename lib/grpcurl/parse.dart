@@ -49,7 +49,7 @@ Future<List<ProtoService>> parseProto(context, String path) async {
       );
       var outmsg = line.substring(
         line.indexOf('s (') + 4,
-        line.indexOf(');') - 1,
+        line.indexOf(');') - 2,
       );
       currentService.methods.add(ProtoMethod(name, inmsg, outmsg));
     }
