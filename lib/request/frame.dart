@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/navigator/frame.dart';
 import 'package:grpc_rocket/request/request.dart';
 import 'package:grpc_rocket/request/response.dart';
-import 'package:multi_split_view/multi_split_view.dart';
 import 'package:grpc_rocket/request/adress.dart';
 
 class RequstFrame extends StatelessWidget {
@@ -23,24 +21,16 @@ class RequstFrame extends StatelessWidget {
             ),
           ],
         ),
-        MultiSplitViewTheme(
-          data: MultiSplitViewThemeData(
-            dividerPainter: DividerPainters.background(
-              color: Colors.blueGrey[200],
-              highlightedColor: Colors.blueGrey[500],
+        Row(
+          children: const [
+            RequestPane(
+              adress: '',
+              message: '',
+              service: '',
             ),
-            dividerThickness: 3,
-          ),
-          child: MultiSplitView(
-            initialAreas: [
-              Area(weight: 0.5, minimalSize: 150),
-              Area(minimalSize: 150),
-            ],
-            children: const [
-              RequestPane(),
-              ResponsePane(),
-            ],
-          ),
+            VerticalDivider(),
+            ResponsePane(),
+          ],
         ),
       ],
     );
