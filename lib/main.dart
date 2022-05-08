@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
           child: MultiSplitView(
             initialAreas: [
-              Area(weight: 0.20, minimalSize: 272),
+              Area(weight: 0.26, minimalSize: 272),
               Area(minimalSize: 920),
             ],
             children: const [
