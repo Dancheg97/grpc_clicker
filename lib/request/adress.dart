@@ -98,7 +98,7 @@ class _AdressPanelState extends State<AdressPanel> {
   }
 }
 
-class AdressButton extends StatelessWidget {
+class AdressButton extends StatefulWidget {
   final String text;
   final TextEditingController controller;
   const AdressButton({
@@ -108,20 +108,82 @@ class AdressButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<AdressButton> createState() => _AdressButtonState();
+}
+
+class _AdressButtonState extends State<AdressButton> {
+  Widget currentWidget = Container();
+
+  @override
+  void initState() {
+    currentWidget = RemovableAdressButton(
+      controller: widget.controller,
+      text: widget.text,
+      fold: () {
+        setState(() {
+          currentWidget = Container();
+        });
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      child: currentWidget,
+      duration: const Duration(milliseconds: 377),
+    );
+  }
+}
+
+class RemovableAdressButton extends StatelessWidget {
+  final Function fold;
+  const RemovableAdressButton({
+    Key? key,
+    required this.controller,
+    required this.text,
+    required this.fold,
+  }) : super(key: key);
+
+  final TextEditingController controller;
+  final String text;
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
-      child: TextButton(
-        onPressed: () {
-          controller.text = text;
-          Navigator.pop(context);
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(text),
-          ],
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: TextButton(
+              onPressed: () {
+                controller.text = text;
+                Navigator.pop(context);
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(text),
+                ],
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () async {
+              var prefs = await SharedPreferences.getInstance();
+              var adresses = prefs.getStringList('adresses') ?? [];
+              adresses.remove(text);
+              prefs.setStringList('adresses', adresses);
+              fold();
+            },
+            color: Theme.of(context).hintColor,
+            icon: const Icon(Icons.delete),
+          )
+        ],
       ),
     );
   }
