@@ -13,6 +13,7 @@ class _TestsTabState extends State<TestsTab> {
   removeProtos() async {
     var prefs = await SharedPreferences.getInstance();
     prefs.remove('proto_file_pathes');
+    prefs.remove('adresses');
   }
 
   @override

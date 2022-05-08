@@ -1,5 +1,4 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:grpc_rocket/dialog/show.dart';
 import 'package:grpc_rocket/grpcurl/check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,10 +12,11 @@ Future<bool> addNewProto(context) async {
     var prefs = await SharedPreferences.getInstance();
     var protos = prefs.getStringList('proto_file_pathes')!;
     for (var protoPath in result!.paths) {
-      if (kDebugMode) {
-        print(protoPath);
+      if (protos.contains(protoPath!)) {
+        showNotification(context, NotificationType.protoPathExists);
+        return false;
       }
-      protos.add(protoPath!);
+      protos.add(protoPath);
       var checked = await checkProto(protoPath);
       if (!checked) {
         showNotification(context, NotificationType.protoParseError);
@@ -31,9 +31,6 @@ Future<bool> addNewProto(context) async {
     return true;
   } catch (e) {
     showNotification(context, NotificationType.protoSaveError);
-    if (kDebugMode) {
-      print(e);
-    }
     return false;
   }
 }
