@@ -15,9 +15,15 @@ class _AdressPanelState extends State<AdressPanel> {
   saveAdress() async {
     var prefs = await SharedPreferences.getInstance();
     var adresses = prefs.getStringList('adresses') ?? [];
-    if (!adresses.contains(controller.text) && controller.text != "") {
-      adresses.add(controller.text);
+    if (controller.text != "") {
+      showNotification(context, NotificationType.adressEmpty);
+      return;
     }
+    if (adresses.contains(controller.text)) {
+      showNotification(context, NotificationType.adressExists);
+      return;
+    }
+    adresses.add(controller.text);
     prefs.setStringList('adresses', adresses);
     showNotification(context, NotificationType.adressSaved);
   }
@@ -42,7 +48,7 @@ class _AdressPanelState extends State<AdressPanel> {
               IconButton(
                 icon: const Icon(Icons.upload_rounded),
                 onPressed: () {
-                  saveAdress();
+                  loadAdress();
                 },
               ),
               IconButton(

@@ -80,7 +80,7 @@ void showNotification(context, NotificationType type) {
       showCloseIcon: showCloseIcon,
     ).show();
   }
-  if (type == NotificationType.protoParseError) {
+  if (type == NotificationType.adressEmpty) {
     AwesomeDialog(
       context: context,
       dialogType: DialogType.ERROR,
