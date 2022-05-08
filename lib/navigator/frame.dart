@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/navigator/history/history.dart';
-import 'package:grpc_rocket/navigator/protos/frame.dart';
-import 'package:grpc_rocket/navigator/tests/tests.dart';
+import 'package:grpc_rocket/navigator/history_frame.dart';
+import 'package:grpc_rocket/navigator/proto_frame.dart';
+import 'package:grpc_rocket/navigator/tests_frame.dart';
 
 class NavigatorFrame extends StatelessWidget {
   const NavigatorFrame({Key? key}) : super(key: key);

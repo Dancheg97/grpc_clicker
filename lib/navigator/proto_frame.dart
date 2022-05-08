@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/grpcurl/parser.dart';
-import 'package:grpc_rocket/navigator/protos/proto.dart';
+import 'package:grpc_rocket/navigator/proto_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProtosTab extends StatefulWidget {
