@@ -5,22 +5,20 @@ import 'package:grpc_rocket/dialog/show.dart';
 
 const ls = LineSplitter();
 
-enum ProtoType {
-  service,
-  method,
-  message,
-}
-
-class ProtoElem {
-  final ProtoType type;
+class ProtoService {
   final String name;
-  ProtoElem({
-    required this.name,
-    required this.type,
-  });
+  List<ProtoMethod> methods;
+  ProtoService(this.name, this.methods);
 }
 
-Future<List<ProtoElem>> parseProto(context, String path) async {
+class ProtoMethod {
+  final String name;
+  final String inMessage;
+  final String outMessage;
+  ProtoMethod(this.name, this.inMessage, this.outMessage);
+}
+
+Future<List<ProtoService>> parseProto(context, String path) async {
   var callResult = await Process.run(
     'grpcurl',
     ['-import-path', '/', '-proto', path, 'describe'],
@@ -29,18 +27,32 @@ Future<List<ProtoElem>> parseProto(context, String path) async {
     showNotification(context, NotificationType.protoParseError);
     return [];
   }
-  List<ProtoElem> protoElems = [];
   List<String> lines = ls.convert("${callResult.stdout}");
+  List<ProtoService> services = [];
+  ProtoService currentService = ProtoService('', []);
   for (var line in lines) {
     if (line.contains('service') && line.contains('{')) {
       var name = line.replaceAll('service ', '').replaceAll(' {', '');
-      protoElems.add(ProtoElem(isService: true, name: name));
-      continue;
+      if (currentService.name != '') {
+        services.add(currentService);
+      }
+      currentService = ProtoService(name, []);
     }
     if (line.contains('rpc') && line.contains('returns')) {
-      var name = line.substring(line.indexOf('rpc') + 4, line.indexOf('(') - 1);
-      protoElems.add(ProtoElem(isService: false, name: name));
+      var name = line.substring(
+        line.indexOf('rpc') + 4,
+        line.indexOf('(') - 1,
+      );
+      var inmsg = line.substring(
+        line.indexOf('(') + 1,
+        line.indexOf(')') - 1,
+      );
+      var outmsg = line.substring(
+        line.indexOf('s (') + 4,
+        line.indexOf(');') - 1,
+      );
+      currentService.methods.add(ProtoMethod(name, inmsg, outmsg));
     }
   }
-  return [];
+  return services;
 }
