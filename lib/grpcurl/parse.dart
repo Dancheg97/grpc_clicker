@@ -55,12 +55,9 @@ Future<List<ProtoService>> parseProto(context, String path) async {
             line.indexOf(');') - 1,
           )
           .split('.');
-      currentService.methods.add(ProtoMethod(
-        name,
-        inmsg[inmsg.length - 1],
-        outmsg[outmsg.length - 1],
-      ));
+      currentService.methods.add(ProtoMethod(name, inmsg.last, outmsg.last));
     }
   }
+  services.add(currentService);
   return services;
 }

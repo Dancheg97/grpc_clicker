@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/grpcurl/parse.dart';
 
@@ -16,11 +18,12 @@ class _ProtoDefinitionState extends State<ProtoDefinition> {
   Widget current = Container();
 
   Widget getHead(String path) {
-    return ProtoHead(name: path.split("/").last);
+    return ProtoHead(name: path.split(Platform.pathSeparator).last);
   }
 
   loadProto() async {
     List<Widget> elems = [];
+    elems.add(const Divider());
     elems.add(getHead(widget.protoPath));
     var services = await parseProto(context, widget.protoPath);
     for (var service in services) {
