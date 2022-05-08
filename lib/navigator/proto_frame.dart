@@ -66,9 +66,12 @@ class _ProtosTabState extends State<ProtosTab> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
-      child: prototab,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 500),
+        child: prototab,
+      ),
     );
   }
 }

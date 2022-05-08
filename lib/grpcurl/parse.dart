@@ -43,15 +43,23 @@ Future<List<ProtoService>> parseProto(context, String path) async {
         line.indexOf('rpc') + 4,
         line.indexOf('(') - 1,
       );
-      var inmsg = line.substring(
-        line.indexOf('(') + 1,
-        line.indexOf(')') - 1,
-      );
-      var outmsg = line.substring(
-        line.indexOf('s (') + 4,
-        line.indexOf(');') - 2,
-      );
-      currentService.methods.add(ProtoMethod(name, inmsg, outmsg));
+      var inmsg = line
+          .substring(
+            line.indexOf('(') + 2,
+            line.indexOf(')') - 1,
+          )
+          .split('.');
+      var outmsg = line
+          .substring(
+            line.indexOf(' returns ( ') + 11,
+            line.indexOf(');') - 1,
+          )
+          .split('.');
+      currentService.methods.add(ProtoMethod(
+        name,
+        inmsg[inmsg.length - 1],
+        outmsg[outmsg.length - 1],
+      ));
     }
   }
   return services;
