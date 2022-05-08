@@ -5,12 +5,18 @@ import 'package:grpc_rocket/dialog/show.dart';
 
 const ls = LineSplitter();
 
+enum ProtoType {
+  service,
+  method,
+  message,
+}
+
 class ProtoElem {
-  final bool isService;
+  final ProtoType type;
   final String name;
   ProtoElem({
-    required this.isService,
     required this.name,
+    required this.type,
   });
 }
 
