@@ -7,6 +7,7 @@ enum NotificationType {
   protoSaved,
   protoSaveError,
   protoParseError,
+  protoPathExists,
 }
 
 void showNotification(context, NotificationType type) {
@@ -39,6 +40,17 @@ void showNotification(context, NotificationType type) {
       headerAnimationLoop: false,
       title: 'Error!',
       desc: 'Unable to parse proto file, check proto file.',
+      width: dialogWidth,
+      showCloseIcon: showCloseIcon,
+    ).show();
+  }
+  if (type == NotificationType.protoPathExists) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.WARNING,
+      headerAnimationLoop: false,
+      title: 'Warning!',
+      desc: 'You already added this proto file. You dont have to add it twice.',
       width: dialogWidth,
       showCloseIcon: showCloseIcon,
     ).show();
