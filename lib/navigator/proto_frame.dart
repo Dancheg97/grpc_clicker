@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/grpcurl/parser.dart';
+import 'package:grpc_rocket/grpcurl/add.dart';
 import 'package:grpc_rocket/navigator/proto_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,8 +39,20 @@ class _ProtosTabState extends State<ProtosTab> {
         protoPath: protoPath,
       ));
     }
+    protosList.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AddProto(
+        onPressed: () async {
+          var updated = await addNewProto(context);
+          if (updated) {
+            loadProtos();
+          }
+        },
+      ),
+    ));
     setState(() {
-      prototab = Column(
+      prototab = ListView(
+        key: UniqueKey(),
         children: protosList,
       );
     });
@@ -54,7 +66,10 @@ class _ProtosTabState extends State<ProtosTab> {
 
   @override
   Widget build(BuildContext context) {
-    return prototab;
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      child: prototab,
+    );
   }
 }
 
