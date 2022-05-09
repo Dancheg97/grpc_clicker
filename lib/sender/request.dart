@@ -29,6 +29,7 @@ class RequestPane extends StatelessWidget {
                   return RequestTextField(
                     key: UniqueKey(),
                     startText: model.request,
+                    saveName: model.description,
                   );
                 },
               ),
@@ -42,9 +43,11 @@ class RequestPane extends StatelessWidget {
 
 class RequestTextField extends StatefulWidget {
   final String startText;
+  final String saveName;
   const RequestTextField({
     Key? key,
     required this.startText,
+    required this.saveName,
   }) : super(key: key);
 
   @override
@@ -54,10 +57,19 @@ class RequestTextField extends StatefulWidget {
 class _RequestTextFieldState extends State<RequestTextField> {
   var controller = TextEditingController();
 
+  loadCachedReq() async {
+    var prefs = await SharedPreferences.getInstance();
+    var cached = prefs.getString(widget.saveName);
+    if (cached != null) {
+      controller.text = cached;
+    }
+  }
+
   @override
   void initState() {
     controller.text = widget.startText;
     super.initState();
+    loadCachedReq();
   }
 
   @override
@@ -75,7 +87,8 @@ class _RequestTextFieldState extends State<RequestTextField> {
       ),
       onChanged: (text) async {
         var prefs = await SharedPreferences.getInstance();
-        prefs.setString('adress', text);
+        prefs.setString('req', text);
+        prefs.setString(widget.saveName, text);
       },
     );
   }
