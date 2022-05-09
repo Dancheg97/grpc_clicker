@@ -25,7 +25,7 @@ Future<String> parseRequst(String protoPath, String msgName) async {
         continue;
       }
       if (splitted[2] == 'repeated') {
-        fields[wrapField(splitted[4])] == '[]';
+        fields[wrapField(splitted[4])] = '[]';
         continue;
       }
       if (splitted[2] == 'optional') {
