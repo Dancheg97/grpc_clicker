@@ -16,6 +16,13 @@ To use this application you have to have `grpcurl` installed on your machine, wh
 go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 ```
 
+# Installing
+
+TODO explain
+
+# Using
+
+TODO show example
 
 ### Currently supported features:
 
@@ -30,9 +37,4 @@ go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 
 - gRPC streams
 - complex bodies
-- tests and tests groups 
-
-## TODO
-
-- add check if grpcurl installed
-- Send grpcurl message to service ``
+- tests and tests groups
