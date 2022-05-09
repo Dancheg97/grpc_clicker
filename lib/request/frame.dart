@@ -25,12 +25,16 @@ class RequstFrame extends StatelessWidget {
           child: IntrinsicHeight(
             child: Row(
               children: const [
-                RequestPane(),
+                Expanded(
+                  child: RequestPane(),
+                ),
                 VerticalDivider(
                   indent: 15,
                   endIndent: 15,
                 ),
-                ResponsePane(),
+                Expanded(
+                  child: ResponsePane(),
+                ),
               ],
             ),
           ),

@@ -7,12 +7,10 @@ class RequestPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.black,
-        height: 111,
-        width: 111,
-      ),
+    return Container(
+      color: Colors.black,
+      height: 111,
+      width: 111,
     );
   }
 }
