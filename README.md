@@ -10,7 +10,14 @@ gRPC-Rocket is cross-platform application for testing [gRPC](https://grpc.io) AP
 
 Application is built with [flutter](https://flutter.dev), but under the hood it uses [grpcurl](https://github.com/fullstorydev/grpcurl).
 
-Currently supported features:
+To use this application you have to have `grpcurl` installed on your machine, which can be done with command (if you have go language installed):
+
+```cmd
+go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+```
+
+
+### Currently supported features:
 
 - Api schema parser
 - Body autofilling
@@ -19,10 +26,11 @@ Currently supported features:
 - Request body caching
 - Request body saving
 
-Not supported features:
+### Not supported features:
 
 - gRPC streams
 - complex bodies
+- tests and tests groups 
 
 ## TODO
 
