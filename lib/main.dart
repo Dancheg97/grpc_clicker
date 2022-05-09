@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/navigator/frame.dart';
-import 'package:grpc_rocket/request/frame.dart';
+import 'package:grpc_rocket/sender/frame.dart';
 import 'package:multi_split_view/multi_split_view.dart';
 
 void main() {

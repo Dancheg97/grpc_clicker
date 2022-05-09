@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/request/request.dart';
-import 'package:grpc_rocket/request/response.dart';
-import 'package:grpc_rocket/request/adress.dart';
+import 'package:grpc_rocket/sender/request.dart';
+import 'package:grpc_rocket/sender/response.dart';
+import 'package:grpc_rocket/sender/adress.dart';
 
 class RequstFrame extends StatelessWidget {
   const RequstFrame({Key? key}) : super(key: key);
