@@ -28,16 +28,10 @@ class _ProtosTabState extends State<ProtosTab> {
     var services = await parseProto(context, path);
     for (var service in services) {
       elems.add(const Divider());
-      elems.add(ProtoTile(
-        name: service.name,
-        icon: Icons.account_tree_rounded,
-        indent: 0,
-      ));
+      elems.add(ProtoServiceTile(name: service.name));
       for (var method in service.methods) {
-        elems.add(ProtoTile(
+        elems.add(ProtoServiceTile(
           name: method.name,
-          icon: Icons.send_rounded,
-          indent: 8,
         ));
       }
     }
@@ -137,16 +131,9 @@ class AddProto extends StatelessWidget {
   }
 }
 
-class ProtoTile extends StatelessWidget {
+class ProtoServiceTile extends StatelessWidget {
   final String name;
-  final IconData icon;
-  final double indent;
-  const ProtoTile({
-    Key? key,
-    required this.name,
-    required this.icon,
-    required this.indent,
-  }) : super(key: key);
+  const ProtoServiceTile({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -155,15 +142,45 @@ class ProtoTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(width: indent),
           Icon(
-            icon,
+            Icons.account_tree_rounded,
             size: 14,
             color: Colors.blueGrey[500],
           ),
           const SizedBox(width: 6),
           Text(name),
         ],
+      ),
+    );
+  }
+}
+
+class ProtoMethodTile extends StatelessWidget {
+  final ProtoMethod method;
+  const ProtoMethodTile({
+    Key? key,
+    required this.method,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 24,
+      child: TextButton(
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(width: 14),
+            Icon(
+              Icons.send_rounded,
+              size: 14,
+              color: Colors.blueGrey[500],
+            ),
+            const SizedBox(width: 6),
+            Text(method.name),
+          ],
+        ),
       ),
     );
   }
