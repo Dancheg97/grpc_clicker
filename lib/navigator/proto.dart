@@ -170,7 +170,10 @@ class ProtoMethodTile extends StatelessWidget {
       child: TextButton(
         onPressed: () async {
           var req = await parseRequst(method.protoPath, method.inMessage);
-          Provider.of<RequestNotifier>(context, listen: false).change(req);
+          Provider.of<RequestNotifier>(context, listen: false).change(
+            req,
+            method.inMessage,
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
