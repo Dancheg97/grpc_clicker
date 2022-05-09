@@ -89,8 +89,18 @@ Future<String> sendRequst() async {
   var method = prefs.getString('method')!;
   var sendResult = await Process.run(
     'grpcurl',
-    // '-import-path', '/',
-    ['-proto', proto, '-d', req, '-plaintext', adress, method],
+    [
+      '-import-path',
+      '/',
+      '-proto',
+      proto,
+      '-d',
+      req,
+      '-plaintext',
+      adress,
+      method
+    ],
   );
+  var err = sendResult.stderr;
   return '${sendResult.stdout}';
 }

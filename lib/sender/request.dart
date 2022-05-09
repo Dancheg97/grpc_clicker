@@ -63,6 +63,7 @@ class _RequestTextFieldState extends State<RequestTextField> {
     if (cached != null) {
       controller.text = cached;
     }
+    prefs.setString('req', controller.text);
   }
 
   @override
