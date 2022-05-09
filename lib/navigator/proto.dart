@@ -30,9 +30,7 @@ class _ProtosTabState extends State<ProtosTab> {
       elems.add(const Divider());
       elems.add(ProtoServiceTile(name: service.name));
       for (var method in service.methods) {
-        elems.add(ProtoServiceTile(
-          name: method.name,
-        ));
+        elems.add(ProtoMethodTile(method: method));
       }
     }
     return Column(
