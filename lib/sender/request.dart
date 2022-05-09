@@ -25,7 +25,6 @@ class RequestPane extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: JsonEditor.string(
-                  key: UniqueKey(),
                   jsonString: model.request,
                   onValueChanged: (value) {},
                 ),

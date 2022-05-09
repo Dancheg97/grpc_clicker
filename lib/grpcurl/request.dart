@@ -3,11 +3,10 @@ import 'dart:io';
 
 const ls = LineSplitter();
 
-String wrapField(String field) {
-  return '"' + field + '"';
-}
-
 Future<String> parseRequst(String protoPath, String msgName) async {
+  if (msgName == '.google.protobuf.Empty') {
+    return '';
+  }
   var callResult = await Process.run(
     'grpcurl',
     ['-import-path', '/', '-proto', protoPath, 'describe', msgName],
@@ -74,4 +73,8 @@ Future<String> parseRequst(String protoPath, String msgName) async {
   resultString = resultString.substring(0, resultString.length - 2);
   resultString += '\n}';
   return resultString;
+}
+
+String wrapField(String field) {
+  return '"' + field + '"';
 }
