@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:json_editor/json_editor.dart';
 
 class RequestPane extends StatelessWidget {
   const RequestPane({
@@ -8,10 +9,23 @@ class RequestPane extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        color: Colors.black,
-        height: 111,
-        width: 111,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: JsonEditor.string(
+          jsonString: '''
+          {
+              // This is a comment
+              "name": "young chan",
+              "number": 100,
+              "boo": true,
+              "user": {"age": 20, "tall": 1.8},
+              "cities": ["beijing", "shanghai", "shenzhen"]
+           }
+    ''',
+          onValueChanged: (value) {
+            print(value);
+          },
+        ),
       ),
     );
   }

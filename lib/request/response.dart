@@ -7,9 +7,8 @@ class ResponsePane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.red,
+    return const Expanded(
+      child: SizedBox(
         height: 111,
         width: 111,
       ),

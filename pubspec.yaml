@@ -14,6 +14,7 @@ dependencies:
   shared_preferences: ^2.0.13
   awesome_dialog: ^2.2.1
   file_picker: ^4.5.1
+  json_editor: ^0.0.7
   
 
 dev_dependencies:
