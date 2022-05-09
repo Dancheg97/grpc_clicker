@@ -21,16 +21,7 @@ class RequestPane extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: JsonEditor.string(
-              jsonString: '''
-              {
-                  // This is a comment
-                  "name": "young chan",
-                  "number": 100,
-                  "boo": true,
-                  "user": {"age": 20, "tall": 1.8},
-                  "cities": ["beijing", "shanghai", "shenzhen"]
-               }
-    ''',
+              jsonString: 'nan',
               onValueChanged: (value) {
                 print(value);
               },
@@ -39,5 +30,10 @@ class RequestPane extends StatelessWidget {
         ),
       ),
     );
+    // return Consumer<RequestNotifier>(
+    //   builder: (context, model, child) {
+
+    //   },
+    // );
   }
 }

@@ -21,11 +21,13 @@ class ProtoMethod {
   final String fullName;
   final String inMessage;
   final String outMessage;
+  final String protoPath;
   ProtoMethod({
     required this.name,
     required this.fullName,
     required this.inMessage,
     required this.outMessage,
+    required this.protoPath,
   });
 }
 
@@ -73,6 +75,7 @@ Future<List<ProtoService>> parseProto(context, String path) async {
           fullName: '$apiFullName${currentService.name}/$name',
           inMessage: inmsg,
           outMessage: outmsg,
+          protoPath: path,
         ),
       );
     }
