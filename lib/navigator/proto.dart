@@ -174,6 +174,9 @@ class ProtoMethodTile extends StatelessWidget {
             req,
             method.inMessage,
           );
+          var prefs = await SharedPreferences.getInstance();
+          prefs.setString('proto', method.protoPath);
+          prefs.setString('method', method.fullName);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

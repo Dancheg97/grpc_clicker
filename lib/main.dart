@@ -10,6 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => RequestNotifier()),
+        ChangeNotifierProvider(create: (context) => ResponseNotifier()),
       ],
       child: const MyApp(),
     ),
