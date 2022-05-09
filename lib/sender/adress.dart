@@ -68,7 +68,7 @@ class _AdressPanelState extends State<AdressPanel> {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          hintText: 'Pick adress',
+          hintText: 'rpc adress',
           contentPadding: const EdgeInsets.all(15),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),

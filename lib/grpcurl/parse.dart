@@ -46,8 +46,7 @@ Future<List<ProtoService>> parseProto(context, String path) async {
   ProtoService currentService = ProtoService('', [], '');
   for (var line in lines) {
     if (line.endsWith(' is a service:')) {
-      var splittedLine = line.split('.');
-      apiFullName = '${splittedLine[0]}.${splittedLine[1]}.';
+      apiFullName = line.replaceAll(' is a service:', '');
     }
     if (line.contains('service') && line.contains('{')) {
       var name = line.replaceAll('service ', '').replaceAll(' {', '');
