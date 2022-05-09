@@ -67,11 +67,11 @@ Future<String> parseRequst(String protoPath, String msgName) async {
       fields[wrapField(splitted[3])] = '"?"';
     }
   }
-  var resultString = '{';
+  var resultString = '{\n';
   fields.forEach((key, value) {
-    resultString += '    ' + key + ':' + value + ',\n';
+    resultString += '    ' + key + ': ' + value + ',\n';
   });
-  resultString = resultString.substring(0, resultString.length - 3);
+  resultString = resultString.substring(0, resultString.length - 2);
   resultString += '\n}';
   return resultString;
 }

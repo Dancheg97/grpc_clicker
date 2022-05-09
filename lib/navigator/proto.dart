@@ -5,6 +5,7 @@ import 'package:grpc_rocket/grpcurl/add.dart';
 import 'package:grpc_rocket/grpcurl/parse.dart';
 import 'package:grpc_rocket/grpcurl/request.dart';
 import 'package:grpc_rocket/providers/request.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProtosTab extends StatefulWidget {
@@ -168,8 +169,8 @@ class ProtoMethodTile extends StatelessWidget {
       height: 24,
       child: TextButton(
         onPressed: () async {
-          var req = await parseRequst(method.protoPath, method.fullName);
-          RequestNotifier().change(req);
+          var req = await parseRequst(method.protoPath, method.inMessage);
+          Provider.of<RequestNotifier>(context, listen: false).change(req);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
