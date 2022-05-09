@@ -1,8 +1,10 @@
-# grpc_rocket
+# <p  align="center" style="font-family:courier;font-size:180%" size=212px> DISCORD ALERTS </p>
 
-cd ..;cd gRPC_api_example;go run .
-grpcurl -proto api.proto -d '{"message": 12.123}' -plaintext localhost:12201 pb.Basics/DoubleCall
-grpcurl -import-path . -proto C:\Users\dangd\OneDrive\Документы\gRPC_api_example\api.proto describe
+[![Generic badge](https://img.shields.io/badge/LICENSE-MIT-orange.svg)](LICENSE)
+
+<p align="center">
+<img align="center" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="138px" height="138px" src="https://cdn-icons-png.flaticon.com/512/762/762658.png" /> 
+</p>
 
 ## TODO
 
