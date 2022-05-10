@@ -9,11 +9,3 @@ class RequestNotifier extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-class ResponseNotifier extends ChangeNotifier {
-  late String response = '';
-  void chage(String newResponse) {
-    response = newResponse;
-    notifyListeners();
-  }
-}

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/grpcurl/send.dart';
+import 'package:grpc_rocket/providers/response.dart';
 import 'package:grpc_rocket/sender/request.dart';
 import 'package:grpc_rocket/sender/response.dart';
 import 'package:grpc_rocket/sender/adress.dart';
+import 'package:provider/provider.dart';
 
 class RequstFrame extends StatelessWidget {
   const RequstFrame({Key? key}) : super(key: key);
@@ -18,7 +20,11 @@ class RequstFrame extends StatelessWidget {
             ),
             IconButton(
               onPressed: () async {
-                sendRequst();
+                var rez = await sendRequst();
+                Provider.of<ResponseNotifier>(context, listen: false).change(
+                  rez.result,
+                  rez.error,
+                );
               },
               icon: const Icon(Icons.send_rounded),
             ),

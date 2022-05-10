@@ -21,18 +21,15 @@ class RequestPane extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Consumer<RequestNotifier>(
-                builder: (context, model, child) {
-                  return RequestTextField(
-                    key: UniqueKey(),
-                    startText: model.request,
-                    saveName: model.description,
-                  );
-                },
-              ),
+            padding: const EdgeInsets.all(24.0),
+            child: Consumer<RequestNotifier>(
+              builder: (context, model, child) {
+                return RequestTextField(
+                  key: UniqueKey(),
+                  startText: model.request,
+                  saveName: model.description,
+                );
+              },
             ),
           ),
         ),
@@ -79,8 +76,10 @@ class _RequestTextFieldState extends State<RequestTextField> {
       controller: controller,
       keyboardType: TextInputType.multiline,
       maxLines: null,
+      expands: true,
+      textAlignVertical: TextAlignVertical.top,
       decoration: InputDecoration(
-        hintText: 'grpc requst input field',
+        hintText: 'grpcurl input',
         contentPadding: const EdgeInsets.all(15),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
