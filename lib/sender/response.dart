@@ -55,7 +55,12 @@ class _ResponseTextFieldState extends State<ResponseTextField> {
 
   @override
   void initState() {
-    controller.text = widget.response;
+    controller.text = '''
+Response:
+${widget.response}
+Error:
+${widget.error}
+    ''';
     super.initState();
   }
 
