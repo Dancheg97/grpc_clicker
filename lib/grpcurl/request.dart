@@ -80,28 +80,3 @@ Future<String> parseRequst(String protoPath, String msgName) async {
 String wrapField(String field) {
   return '"' + field + '"';
 }
-
-Future<String> sendRequst() async {
-  var prefs = await SharedPreferences.getInstance();
-  var adress = prefs.getString('adress')!;
-  var req = prefs.getString('req')!;
-  var proto = prefs.getString('proto')!;
-  var method = prefs.getString('method')!;
-  var sendResult = await Process.run(
-    'grpcurl',
-    [
-      '-import-path',
-      '/',
-      '-proto',
-      proto,
-      '-d',
-      req,
-      '-plaintext',
-      adress,
-      method
-    ],
-  );
-  var err = sendResult.stderr;
-  var rez = sendResult.stdout;
-  return '${sendResult.stdout}';
-}

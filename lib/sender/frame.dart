@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/grpcurl/request.dart';
+import 'package:grpc_rocket/grpcurl/send.dart';
 import 'package:grpc_rocket/sender/request.dart';
 import 'package:grpc_rocket/sender/response.dart';
 import 'package:grpc_rocket/sender/adress.dart';
