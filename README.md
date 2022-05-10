@@ -18,7 +18,13 @@ go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 
 ## Installing
 
-TODO explain
+- Windows
+
+Download [app](download/windows) for windows and use it launching `.exe` file.
+
+- Macos
+
+TODO
 
 ## Using
 
