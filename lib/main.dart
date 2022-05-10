@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:grpc_rocket/navigator/frame.dart';
+import 'package:grpc_rocket/sender/frame.dart';
+import 'package:grpc_rocket/sender/request.dart';
 
 void main() {
   runApp(const MyApp());
   doWhenWindowReady(() {
     final win = appWindow;
-    final initialSize = Size(900, 650);
+    const initialSize = Size(900, 650);
     win.minSize = initialSize;
     win.size = initialSize;
     win.alignment = Alignment.center;
@@ -14,7 +17,13 @@ void main() {
   });
 }
 
-const borderColor = Color(0xFF805306);
+// 8ECAE6
+// 219EBC
+// 023047
+// FFB703
+// FFB703
+
+const borderColor = Color(0xFF023047);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -39,7 +48,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const sidebarColor = Color(0xFFF6A00C);
+const sidebarColor = Color(0xFF023047);
 
 class LeftSide extends StatelessWidget {
   const LeftSide({Key? key}) : super(key: key);
@@ -47,13 +56,17 @@ class LeftSide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
+      width: 260,
       child: Container(
         color: sidebarColor,
         child: Column(
           children: [
-            WindowTitleBarBox(child: MoveWindow()),
-            Expanded(child: Container())
+            WindowTitleBarBox(
+              child: MoveWindow(),
+            ),
+            const Expanded(
+              child: NavigatorFrame(),
+            )
           ],
         ),
       ),
@@ -61,8 +74,8 @@ class LeftSide extends StatelessWidget {
   }
 }
 
-const backgroundStartColor = Color(0xFFFFD500);
-const backgroundEndColor = Color(0xFFF6A00C);
+const backgroundStartColor = Color(0xFF8ECAE6);
+const backgroundEndColor = Color(0xFF219EBC);
 
 class RightSide extends StatelessWidget {
   const RightSide({Key? key}) : super(key: key);
@@ -73,18 +86,23 @@ class RightSide extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [backgroundStartColor, backgroundEndColor],
-              stops: [0.0, 1.0]),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [backgroundStartColor, backgroundEndColor],
+            stops: [0.0, 1.0],
+          ),
         ),
         child: Column(
           children: [
             WindowTitleBarBox(
               child: Row(
-                children: [Expanded(child: MoveWindow()), WindowButtons()],
+                children: [
+                  Expanded(child: MoveWindow()),
+                  WindowButtons(),
+                ],
               ),
             ),
+            Expanded(child: RequstFrame()),
           ],
         ),
       ),
@@ -92,23 +110,23 @@ class RightSide extends StatelessWidget {
   }
 }
 
-final buttonColors = WindowButtonColors(
-  iconNormal: const Color(0xFF805306),
-  mouseOver: const Color(0xFFF6A00C),
-  mouseDown: const Color(0xFF805306),
-  iconMouseOver: const Color(0xFF805306),
-  iconMouseDown: const Color(0xFFFFD500),
-);
-
-final closeButtonColors = WindowButtonColors(
-  mouseOver: const Color(0xFFD32F2F),
-  mouseDown: const Color(0xFFB71C1C),
-  iconNormal: const Color(0xFF805306),
-  iconMouseOver: Colors.white,
-);
-
 class WindowButtons extends StatelessWidget {
-  const WindowButtons({Key? key}) : super(key: key);
+  WindowButtons({Key? key}) : super(key: key);
+
+  final buttonColors = WindowButtonColors(
+    iconNormal: Colors.white,
+    mouseOver: const Color(0xFF023047),
+    mouseDown: const Color(0xFF219EBC),
+    iconMouseOver: Colors.white,
+    iconMouseDown: Colors.white,
+  );
+
+  final closeButtonColors = WindowButtonColors(
+    mouseOver: const Color(0xFFD32F2F),
+    mouseDown: const Color(0xFFB71C1C),
+    iconNormal: Colors.white,
+    iconMouseOver: Colors.white,
+  );
 
   @override
   Widget build(BuildContext context) {
