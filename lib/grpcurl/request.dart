@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 const ls = LineSplitter();
 
 Future<String> parseRequst(String protoPath, String msgName) async {

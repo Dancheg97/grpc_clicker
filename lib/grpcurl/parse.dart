@@ -32,7 +32,6 @@ class ProtoMethod {
 }
 
 Future<List<ProtoService>> parseProto(context, String path) async {
-  // TODO find service error
   var callResult = await Process.run(
     'grpcurl',
     ['-import-path', '/', '-proto', path, 'describe'],
