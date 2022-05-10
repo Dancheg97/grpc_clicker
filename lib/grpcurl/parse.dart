@@ -48,6 +48,9 @@ Future<List<ProtoService>> parseProto(context, String path) async {
   for (var line in lines) {
     if (line.endsWith(' is a service:')) {
       apiFullName = line.replaceAll(' is a service:', '');
+      if (apiFullName.contains('.')) {
+        apiFullName = apiFullName.split('.')[0];
+      }
     }
     if (line.contains('service') && line.contains('{')) {
       var name = line.replaceAll('service ', '').replaceAll(' {', '');
@@ -72,7 +75,7 @@ Future<List<ProtoService>> parseProto(context, String path) async {
       currentService.methods.add(
         ProtoMethod(
           name: name,
-          fullName: '$apiFullName${currentService.name}/$name',
+          fullName: '$apiFullName.${currentService.name}/$name',
           inMessage: inmsg,
           outMessage: outmsg,
           protoPath: path,

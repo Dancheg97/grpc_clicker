@@ -102,5 +102,6 @@ Future<String> sendRequst() async {
     ],
   );
   var err = sendResult.stderr;
+  var rez = sendResult.stdout;
   return '${sendResult.stdout}';
 }
