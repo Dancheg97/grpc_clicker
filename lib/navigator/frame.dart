@@ -9,7 +9,7 @@ class NavigatorFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(42),
@@ -19,7 +19,7 @@ class NavigatorFrame extends StatelessWidget {
               tabs: [
                 CustomTab(text: "protos"),
                 CustomTab(text: "history"),
-                CustomTab(text: "tests"),
+                // CustomTab(text: "tests"),
               ],
             ),
           ),
@@ -28,7 +28,7 @@ class NavigatorFrame extends StatelessWidget {
           children: [
             ProtosTab(),
             HistoryTab(),
-            TestsTab(),
+            // TestsTab(),
           ],
         ),
       ),

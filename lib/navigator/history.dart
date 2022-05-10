@@ -5,9 +5,18 @@ class HistoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(
-      Icons.book,
-      size: 112,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(
+          Icons.book,
+          size: 112,
+        ),
+        Text(
+          'Under development',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ],
     );
   }
 }
