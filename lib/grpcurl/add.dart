@@ -16,12 +16,12 @@ Future<bool> addNewProto(context) async {
         showNotification(context, NotificationType.protoPathExists);
         return false;
       }
-      protos.add(protoPath);
       var checked = await checkProto(protoPath);
       if (!checked) {
         showNotification(context, NotificationType.protoParseError);
         return false;
       }
+      protos.add(protoPath);
     }
     var saved = await prefs.setStringList('proto_file_pathes', protos);
     if (!saved) {
