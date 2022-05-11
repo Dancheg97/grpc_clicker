@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:grpc_rocket/colors.dart';
+import 'package:grpc_rocket/left/frame.dart';
+import 'package:grpc_rocket/providers.dart';
+import 'package:grpc_rocket/right/frame.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) {
+        return RequestProvider();
+      }),
+      ChangeNotifierProvider(create: (context) {
+        return ResponseProvider();
+      }),
+    ],
+    child: const MyApp(),
+  ));
   doWhenWindowReady(() {
     final win = appWindow;
     const initialSize = Size(900, 650);
@@ -34,99 +48,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class LeftSide extends StatelessWidget {
-  const LeftSide({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 260,
-      child: Container(
-        color: Palette.black,
-        child: Column(
-          children: [
-            WindowTitleBarBox(
-              child: MoveWindow(),
-            ),
-            const Expanded(
-              child: Center(
-                child: Text('navigator'),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class RightSide extends StatelessWidget {
-  const RightSide({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Palette.blueLight, Palette.blueDark],
-            stops: [0.0, 1.0],
-          ),
-        ),
-        child: Column(
-          children: [
-            WindowTitleBarBox(
-              child: Row(
-                children: [
-                  Expanded(child: MoveWindow()),
-                  WindowButtons(),
-                ],
-              ),
-            ),
-            const Expanded(
-              child: Center(
-                child: Text('requests'),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class WindowButtons extends StatelessWidget {
-  WindowButtons({Key? key}) : super(key: key);
-
-  final buttonColors = WindowButtonColors(
-    iconNormal: Palette.white,
-    mouseOver: Palette.black,
-    mouseDown: Palette.blueDark,
-    iconMouseOver: Palette.white,
-    iconMouseDown: Palette.white,
-  );
-
-  final closeButtonColors = WindowButtonColors(
-    mouseOver: const Color(0xFFD32F2F),
-    mouseDown: const Color(0xFFB71C1C),
-    iconNormal: Palette.white,
-    iconMouseOver: Palette.white,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MinimizeWindowButton(colors: buttonColors),
-        MaximizeWindowButton(colors: buttonColors),
-        CloseWindowButton(colors: closeButtonColors),
-      ],
     );
   }
 }
