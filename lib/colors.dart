@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const PaletteBlueLight = Color(0xFF8ECAE6);
-const PaletteBlueDark = Color(0xFF219EBC);
-const PaletteBlack = Color(0xFF023047);
-const PaletteYellow = Color(0xFFFFB703);
-const PaletteWhite = Color(0xFFedf6f9);
+const paletteBlueLight = Color(0xFF8ECAE6);
+const paletteBlueDark = Color(0xFF219EBC);
+const paletteBlack = Color(0xFF023047);
+const paletteYellow = Color(0xFFFFB703);
+const paletteWhite = Color(0xFFedf6f9);

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:grpc_rocket/colors.dart';
-import 'package:grpc_rocket/navigator/frame.dart';
-import 'package:grpc_rocket/sender/frame.dart';
-import 'package:grpc_rocket/sender/request.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: WindowBorder(
-          color: PaletteBlack,
+          color: paletteBlack,
           width: 1,
           child: Row(
             children: const [
@@ -49,14 +46,16 @@ class LeftSide extends StatelessWidget {
     return SizedBox(
       width: 260,
       child: Container(
-        color: PaletteBlack,
+        color: paletteBlack,
         child: Column(
           children: [
             WindowTitleBarBox(
               child: MoveWindow(),
             ),
             const Expanded(
-              child: NavigatorFrame(),
+              child: Center(
+                child: Text('navigator'),
+              ),
             )
           ],
         ),
@@ -77,8 +76,8 @@ class RightSide extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              PaletteBlueLight,
-              PaletteBlueDark,
+              paletteBlueLight,
+              paletteBlueDark,
             ],
             stops: [0.0, 1.0],
           ),
@@ -109,18 +108,18 @@ class WindowButtons extends StatelessWidget {
   WindowButtons({Key? key}) : super(key: key);
 
   final buttonColors = WindowButtonColors(
-    iconNormal: PaletteWhite,
-    mouseOver: PaletteBlack,
-    mouseDown: PaletteBlueDark,
-    iconMouseOver: PaletteWhite,
-    iconMouseDown: PaletteWhite,
+    iconNormal: paletteWhite,
+    mouseOver: paletteBlack,
+    mouseDown: paletteBlueDark,
+    iconMouseOver: paletteWhite,
+    iconMouseDown: paletteWhite,
   );
 
   final closeButtonColors = WindowButtonColors(
     mouseOver: const Color(0xFFD32F2F),
     mouseDown: const Color(0xFFB71C1C),
-    iconNormal: PaletteWhite,
-    iconMouseOver: PaletteWhite,
+    iconNormal: paletteWhite,
+    iconMouseOver: paletteWhite,
   );
 
   @override
