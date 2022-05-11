@@ -4,6 +4,7 @@ import 'package:grpc_rocket/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:grpc_rocket/data.dart';
 import 'package:grpc_rocket/file.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProtosTab extends StatefulWidget {
   const ProtosTab({Key? key}) : super(key: key);
@@ -76,14 +77,11 @@ class _ProtosTabState extends State<ProtosTab> {
                 ),
                 items: fileNames
                     .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
+                        value: item,
+                        child: Text(item,
                             style: const TextStyle(
                               fontSize: 14,
-                            ),
-                          ),
-                        ))
+                            ))))
                     .toList(),
                 value: selectedValue,
                 onChanged: (value) {
@@ -100,7 +98,7 @@ class _ProtosTabState extends State<ProtosTab> {
           ElevatedButton(
             onPressed: () async {
               if (selectedValue == null) {
-                // TODO make dialogue nothing to remove
+                Dialogue.protoNothingToRemove(context);
                 return;
               }
               for (var path in filePathes) {

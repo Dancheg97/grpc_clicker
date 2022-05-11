@@ -34,7 +34,7 @@ class Dialogue {
       dialogType: DialogType.INFO_REVERSED,
       headerAnimationLoop: false,
       title: 'Nothing to remove!',
-      desc: 'Pick some proto to remove it"s path.',
+      desc: "Pick some proto to remove it's path.",
       width: dialogWidth,
       showCloseIcon: showCloseIcon,
     ).show();
