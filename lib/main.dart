@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: WindowBorder(
-          color: paletteBlack,
+          color: Palette.black,
           width: 1,
           child: Row(
             children: const [
@@ -46,7 +46,7 @@ class LeftSide extends StatelessWidget {
     return SizedBox(
       width: 260,
       child: Container(
-        color: paletteBlack,
+        color: Palette.black,
         child: Column(
           children: [
             WindowTitleBarBox(
@@ -71,14 +71,11 @@ class RightSide extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              paletteBlueLight,
-              paletteBlueDark,
-            ],
+            colors: [Palette.blueLight, Palette.blueDark],
             stops: [0.0, 1.0],
           ),
         ),
@@ -108,18 +105,18 @@ class WindowButtons extends StatelessWidget {
   WindowButtons({Key? key}) : super(key: key);
 
   final buttonColors = WindowButtonColors(
-    iconNormal: paletteWhite,
-    mouseOver: paletteBlack,
-    mouseDown: paletteBlueDark,
-    iconMouseOver: paletteWhite,
-    iconMouseDown: paletteWhite,
+    iconNormal: Palette.white,
+    mouseOver: Palette.black,
+    mouseDown: Palette.blueDark,
+    iconMouseOver: Palette.white,
+    iconMouseDown: Palette.white,
   );
 
   final closeButtonColors = WindowButtonColors(
     mouseOver: const Color(0xFFD32F2F),
     mouseDown: const Color(0xFFB71C1C),
-    iconNormal: paletteWhite,
-    iconMouseOver: paletteWhite,
+    iconNormal: Palette.white,
+    iconMouseOver: Palette.white,
   );
 
   @override
