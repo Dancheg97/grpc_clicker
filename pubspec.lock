@@ -139,13 +139,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_dropdown:
-    dependency: "direct main"
-    description:
-      name: flutter_dropdown
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0+hotfix.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -205,13 +198,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  multi_split_view:
-    dependency: "direct main"
-    description:
-      name: multi_split_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   nested:
     dependency: transitive
     description:

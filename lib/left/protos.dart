@@ -1,6 +1,9 @@
+import 'package:grpc_rocket/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:grpc_rocket/data.dart';
+import 'package:grpc_rocket/file.dart';
 
 class ProtosTab extends StatefulWidget {
   const ProtosTab({Key? key}) : super(key: key);
@@ -11,11 +14,19 @@ class ProtosTab extends StatefulWidget {
 
 class _ProtosTabState extends State<ProtosTab> {
   String? selectedValue;
-  List<String> items = [];
+  List<String> fileNames = [];
+  List<String> filePathes = [];
+
+  updateProtos() async {
+    fileNames = await Storage.getProtoFiles();
+    filePathes = await Storage.getProtoPathes();
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
+    updateProtos();
   }
 
   @override
@@ -25,7 +36,20 @@ class _ProtosTabState extends State<ProtosTab> {
       child: Row(
         children: [
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              var path = await File.pick();
+              if (path == '') {
+                Dialogue.protoSaveError(context);
+                return;
+              }
+              var rez = await Storage.addProtoPath(path);
+              if (rez == 'exists') {
+                Dialogue.protoPathExists(context);
+                return;
+              }
+              updateProtos();
+              Dialogue.protoSaved(context);
+            },
             child: Icon(
               Icons.add_circle_rounded,
               color: Palette.white,
@@ -34,7 +58,6 @@ class _ProtosTabState extends State<ProtosTab> {
               shape: const CircleBorder(),
               primary: Palette.black,
               onPrimary: Palette.white,
-              padding: const EdgeInsets.all(0),
             ),
           ),
           Expanded(
@@ -51,7 +74,7 @@ class _ProtosTabState extends State<ProtosTab> {
                     color: Theme.of(context).hintColor,
                   ),
                 ),
-                items: items
+                items: fileNames
                     .map((item) => DropdownMenuItem<String>(
                           value: item,
                           child: Text(
@@ -75,7 +98,20 @@ class _ProtosTabState extends State<ProtosTab> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              if (selectedValue == null) {
+                // TODO make dialogue nothing to remove
+                return;
+              }
+              for (var path in filePathes) {
+                if (path.endsWith(selectedValue!.substring(1))) {
+                  Storage.removeProtoPath(path);
+                }
+              }
+              Dialogue.protoRemoved(context);
+              selectedValue = null;
+              updateProtos();
+            },
             child: Icon(
               Icons.remove_circle_rounded,
               color: Palette.white,
@@ -84,7 +120,6 @@ class _ProtosTabState extends State<ProtosTab> {
               shape: const CircleBorder(),
               primary: Palette.black,
               onPrimary: Palette.white,
-              padding: const EdgeInsets.all(0),
             ),
           ),
         ],

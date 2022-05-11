@@ -3,7 +3,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 const dialogWidth = 380.0;
 const showCloseIcon = true;
 
-class Dialog {
+class Dialogue {
   static void protoSaved(context) {
     AwesomeDialog(
       context: context,
@@ -11,6 +11,30 @@ class Dialog {
       headerAnimationLoop: false,
       title: 'Proto path saved!',
       desc: 'You can explore that proto API definition in protos tab.',
+      width: dialogWidth,
+      showCloseIcon: showCloseIcon,
+    ).show();
+  }
+
+  static void protoRemoved(context) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.INFO_REVERSED,
+      headerAnimationLoop: false,
+      title: 'Proto path removed!',
+      desc: 'Proto path have been removed from.',
+      width: dialogWidth,
+      showCloseIcon: showCloseIcon,
+    ).show();
+  }
+
+  static void protoNothingToRemove(context) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.INFO_REVERSED,
+      headerAnimationLoop: false,
+      title: 'Nothing to remove!',
+      desc: 'Pick some proto to remove it"s path.',
       width: dialogWidth,
       showCloseIcon: showCloseIcon,
     ).show();
