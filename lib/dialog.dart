@@ -1,4 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/material.dart';
+import 'package:grpc_rocket/data.dart';
 
 const dialogWidth = 380.0;
 const showCloseIcon = true;
@@ -107,6 +109,40 @@ class Dialogue {
       headerAnimationLoop: false,
       title: 'Empty adress!',
       desc: 'It is impossible to save empty adress.',
+      width: dialogWidth,
+      showCloseIcon: showCloseIcon,
+    ).show();
+  }
+
+  static void addAdress(context) async {
+    var controller = TextEditingController();
+    await AwesomeDialog(
+      context: context,
+      dialogType: DialogType.NO_HEADER,
+      headerAnimationLoop: false,
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text('Enter new adress'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: controller,
+              onEditingComplete: () async {
+                var err = await Storage.addAdress(controller.text);
+                if (err == 'exists') {
+                  adressExists(context);
+                }
+                if (err == 'nothing') {
+                  adressEmpty(context);
+                }
+                Navigator.pop(context);
+                adressSaved(context);
+              },
+            ),
+          ),
+        ],
+      ),
       width: dialogWidth,
       showCloseIcon: showCloseIcon,
     ).show();

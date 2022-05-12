@@ -1,14 +1,10 @@
 import 'dart:io';
 
-import 'package:grpc_rocket/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:grpc_rocket/data.dart';
-import 'package:grpc_rocket/file.dart';
-import 'package:grpc_rocket/grpcurl.dart';
-import 'package:grpc_rocket/providers.dart';
-import 'package:provider/provider.dart';
+import 'package:grpc_rocket/dialog.dart';
 
 class AdressesTab extends StatefulWidget {
   const AdressesTab({Key? key}) : super(key: key);
@@ -39,7 +35,9 @@ class _AdressesTabState extends State<AdressesTab> {
       child: Row(
         children: [
           ElevatedButton(
-            onPressed: () async {},
+            onPressed: () async {
+              Dialogue.addAdress(context);
+            },
             child: Icon(
               Icons.add_circle_rounded,
               color: Palette.black,
