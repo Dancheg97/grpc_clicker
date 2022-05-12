@@ -45,7 +45,7 @@ class _ProtosTabState extends State<ProtosTab> {
                 Dialogue.protoSaveError(context);
                 return;
               }
-              var rez = await Storage.addProtoPath(path);
+              var rez = await Storage.addProto(path);
               if (rez == 'exists') {
                 Dialogue.protoPathExists(context);
                 return;
@@ -118,7 +118,7 @@ class _ProtosTabState extends State<ProtosTab> {
                 Dialogue.protoNothingToRemove(context);
                 return;
               }
-              Storage.removeProtoPath(selectedValue!);
+              Storage.removeProto(selectedValue!);
               Dialogue.protoRemoved(context);
               selectedValue = null;
               updateProtos();

@@ -14,7 +14,9 @@ class MethodTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () async {
+          
+        },
         child: SizedBox(
           width: 225,
           child: Row(
