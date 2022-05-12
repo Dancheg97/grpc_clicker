@@ -52,6 +52,7 @@ class ServiceTab extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: service.methods.map((e) {
                         return MethodTab(method: e);
                       }).toList(),
