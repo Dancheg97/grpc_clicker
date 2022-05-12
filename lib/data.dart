@@ -48,7 +48,7 @@ class Storage {
       return 'exists';
     }
     adresses.add(adress);
-    prefs.setStringList('protos', adresses);
+    prefs.setStringList('adresses', adresses);
     return '';
   }
 }

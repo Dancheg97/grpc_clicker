@@ -14,7 +14,7 @@ class AdressesTab extends StatefulWidget {
 }
 
 class _AdressesTabState extends State<AdressesTab> {
-  String? selectedValue;
+  String? currentAdress;
   List<String> filePathes = [];
 
   updateAdresses() async {
@@ -37,6 +37,7 @@ class _AdressesTabState extends State<AdressesTab> {
           ElevatedButton(
             onPressed: () async {
               Dialogue.addAdress(context);
+              updateAdresses();
             },
             child: Icon(
               Icons.add_circle_rounded,
@@ -76,10 +77,10 @@ class _AdressesTabState extends State<AdressesTab> {
                     ),
                   );
                 }).toList(),
-                value: selectedValue,
+                value: currentAdress,
                 onChanged: (path) async {
                   setState(() {
-                    selectedValue = path as String;
+                    currentAdress = path as String;
                   });
                 },
                 buttonHeight: 40,
@@ -89,7 +90,10 @@ class _AdressesTabState extends State<AdressesTab> {
             ),
           ),
           ElevatedButton(
-            onPressed: () async {},
+            onPressed: () async {
+              Storage.removeAdress(currentAdress!); //TODO check val
+              updateAdresses();
+            },
             child: Icon(
               Icons.remove_circle_rounded,
               color: Palette.black,

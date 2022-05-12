@@ -129,16 +129,49 @@ class Dialogue {
             child: TextField(
               controller: controller,
               onEditingComplete: () async {
+                Navigator.pop(context);
                 var err = await Storage.addAdress(controller.text);
                 if (err == 'exists') {
                   adressExists(context);
+                  return;
                 }
                 if (err == 'nothing') {
                   adressEmpty(context);
+                  return;
                 }
-                Navigator.pop(context);
+                if (err != '') {
+                  adressEmpty(context);
+                  return;
+                }
                 adressSaved(context);
               },
+              decoration: InputDecoration(
+                hintText: 'rpc adress',
+                contentPadding: const EdgeInsets.all(15),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.upload_rounded),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    var err = await Storage.addAdress(controller.text);
+                    if (err == 'exists') {
+                      adressExists(context);
+                      return;
+                    }
+                    if (err == 'nothing') {
+                      adressEmpty(context);
+                      return;
+                    }
+                    if (err != '') {
+                      adressEmpty(context);
+                      return;
+                    }
+                    adressSaved(context);
+                  },
+                ),
+              ),
             ),
           ),
         ],
