@@ -5,9 +5,11 @@ import 'package:grpc_rocket/left/method.dart';
 
 class ServiceTab extends StatelessWidget {
   final ProtoService service;
+  final ProtoStructure structure;
   const ServiceTab({
     Key? key,
     required this.service,
+    required this.structure,
   }) : super(key: key);
 
   @override
@@ -53,8 +55,12 @@ class ServiceTab extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: service.methods.map((e) {
-                        return MethodTab(method: e);
+                      children: service.methods.map((method) {
+                        return MethodTab(
+                          method: method,
+                          service: service,
+                          structure: structure,
+                        );
                       }).toList(),
                     ),
                   ),

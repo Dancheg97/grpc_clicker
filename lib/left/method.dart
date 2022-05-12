@@ -4,9 +4,13 @@ import 'package:grpc_rocket/grpcurl.dart';
 
 class MethodTab extends StatelessWidget {
   final ProtoMethod method;
+  final ProtoService service;
+  final ProtoStructure structure;
   const MethodTab({
     Key? key,
     required this.method,
+    required this.service,
+    required this.structure,
   }) : super(key: key);
 
   @override
@@ -14,9 +18,7 @@ class MethodTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: TextButton(
-        onPressed: () async {
-          
-        },
+        onPressed: () async {},
         child: SizedBox(
           width: 225,
           child: Row(

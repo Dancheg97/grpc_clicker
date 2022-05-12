@@ -70,10 +70,14 @@ class _StructureTabState extends State<StructureTab> {
           duration: const Duration(milliseconds: 377),
           switchInCurve: Curves.easeIn,
           child: SingleChildScrollView(
+            key: UniqueKey(),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: proto.structure.services.map((e) {
-                return ServiceTab(service: e);
+              children: proto.structure.services.map((service) {
+                return ServiceTab(
+                  service: service,
+                  structure: proto.structure,
+                );
               }).toList(),
             ),
           ),
