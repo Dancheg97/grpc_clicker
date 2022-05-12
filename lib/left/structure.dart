@@ -3,17 +3,23 @@ import 'package:grpc_rocket/colors.dart';
 import 'package:grpc_rocket/providers.dart';
 import 'package:provider/provider.dart';
 
-class Structure extends StatelessWidget {
-  const Structure({Key? key}) : super(key: key);
+class StructureTab extends StatefulWidget {
+  const StructureTab({Key? key}) : super(key: key);
 
   @override
+  State<StructureTab> createState() => _StructureTabState();
+}
+
+class _StructureTabState extends State<StructureTab> {
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Consumer<ProtoProvider>(
-        key: UniqueKey(),
-        builder: (context, proto, child) {
-          if (proto.path == '') {
-            return Column(
+    return Consumer<ProtoProvider>(
+      builder: (context, proto, child) {
+        if (proto.path == '') {
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 377),
+            switchInCurve: Curves.easeIn,
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -30,11 +36,38 @@ class Structure extends StatelessWidget {
                   ),
                 ),
               ],
-            );
-          }
-          return Container();
-        },
-      ),
+            ),
+          );
+        }
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 377),
+          switchInCurve: Curves.easeIn,
+          child: Container(
+            key: UniqueKey(),
+            color: Colors.white,
+            width: 100,
+            height: 100,
+          ),
+        );
+      },
     );
   }
 }
+
+// class ServiceTab extends StatelessWidget {
+//   const ServiceTab({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+
+// class MethodTab extends StatelessWidget {
+//   const MethodTab({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }

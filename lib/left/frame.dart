@@ -11,15 +11,17 @@ class LeftSide extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 290,
-      child: Container(
-        color: Palette.black,
-        child: Column(
+      child: Scaffold(
+        backgroundColor: Palette.black,
+        body: Column(
           children: [
             WindowTitleBarBox(
               child: MoveWindow(),
             ),
             const ProtosTab(),
-            const Structure(),
+            const Expanded(
+              child: StructureTab(),
+            ),
           ],
         ),
       ),
