@@ -6,6 +6,7 @@ import 'package:grpc_rocket/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:grpc_rocket/data.dart';
 import 'package:grpc_rocket/file.dart';
+import 'package:grpc_rocket/grpcurl.dart';
 import 'package:grpc_rocket/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -89,17 +90,21 @@ class _ProtosTabState extends State<ProtosTab> {
                   );
                 }).toList(),
                 value: selectedValue,
-                onChanged: (path) {
+                onChanged: (path) async {
                   setState(() {
                     selectedValue = path as String;
                   });
                   if (path == null) {
+                    Provider.of<ProtoProvider>(context, listen: false)
+                        .change(ProtoStructure('', []));
                     return;
                   }
-                  Provider.of<ProtoProvider>(
-                    context,
-                    listen: false,
-                  ).change(path as String);
+                  var proto = await Grpcurl.parseProto(context, path as String);
+                  Provider.of<ProtoProvider>(context, listen: false)
+                      .change(proto);
+                  if (proto.error != '') {
+                    Dialogue.protoParseErr(context);
+                  }
                 },
                 buttonHeight: 40,
                 buttonWidth: 140,
@@ -117,7 +122,8 @@ class _ProtosTabState extends State<ProtosTab> {
               Dialogue.protoRemoved(context);
               selectedValue = null;
               updateProtos();
-              Provider.of<ProtoProvider>(context, listen: false).change('');
+              Provider.of<ProtoProvider>(context, listen: false)
+                  .change(ProtoStructure('', []));
             },
             child: Icon(
               Icons.remove_circle_rounded,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grpc_rocket/grpcurl.dart';
 
 class RequestProvider extends ChangeNotifier {
   late String request = '';
@@ -21,9 +22,9 @@ class ResponseProvider extends ChangeNotifier {
 }
 
 class ProtoProvider extends ChangeNotifier {
-  late String path = '';
-  void change(String newPath) {
-    path = newPath;
+  late ProtoStructure structure = ProtoStructure('', []);
+  void change(ProtoStructure newStructure) {
+    structure = newStructure;
     notifyListeners();
   }
 }
