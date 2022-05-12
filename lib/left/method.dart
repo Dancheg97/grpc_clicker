@@ -16,7 +16,7 @@ class MethodTab extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: SizedBox(
-          width: 210,
+          width: 225,
           child: Row(
             children: [
               Icon(
@@ -24,12 +24,10 @@ class MethodTab extends StatelessWidget {
                 color: Palette.white,
                 size: 12,
               ),
-              SizedBox(width: 14),
+              const SizedBox(width: 6),
               Text(
                 method.protoName,
-                style: TextStyle(
-                  color: Palette.white,
-                ),
+                style: TextStyle(color: Palette.white),
               ),
             ],
           ),

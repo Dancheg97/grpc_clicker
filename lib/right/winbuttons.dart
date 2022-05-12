@@ -6,15 +6,17 @@ class WindowButtons extends StatelessWidget {
   WindowButtons({Key? key}) : super(key: key);
 
   final buttonColors = WindowButtonColors(
+    normal: Palette.black,
     iconNormal: Palette.white,
-    mouseOver: Palette.black,
+    mouseOver: Palette.blueDark,
     mouseDown: Palette.blueDark,
     iconMouseOver: Palette.white,
     iconMouseDown: Palette.white,
   );
 
   final closeButtonColors = WindowButtonColors(
-    mouseOver: const Color(0xFFD32F2F),
+    normal: const Color.fromARGB(255, 180, 6, 6),
+    mouseOver: const Color.fromARGB(255, 255, 0, 0),
     mouseDown: const Color(0xFFB71C1C),
     iconNormal: Palette.white,
     iconMouseOver: Palette.white,
