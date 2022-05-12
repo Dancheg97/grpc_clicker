@@ -19,3 +19,11 @@ class ResponseProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+class ProtoProvider extends ChangeNotifier {
+  late String path = '';
+  void change(String newPath) {
+    path = newPath;
+    notifyListeners();
+  }
+}

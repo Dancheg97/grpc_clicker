@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:grpc_rocket/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:grpc_rocket/data.dart';
 import 'package:grpc_rocket/file.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:grpc_rocket/providers.dart';
+import 'package:provider/provider.dart';
 
 class ProtosTab extends StatefulWidget {
   const ProtosTab({Key? key}) : super(key: key);
@@ -15,11 +18,9 @@ class ProtosTab extends StatefulWidget {
 
 class _ProtosTabState extends State<ProtosTab> {
   String? selectedValue;
-  List<String> fileNames = [];
   List<String> filePathes = [];
 
   updateProtos() async {
-    fileNames = await Storage.getProtoFiles();
     filePathes = await Storage.getProtoPathes();
     setState(() {});
   }
@@ -75,19 +76,30 @@ class _ProtosTabState extends State<ProtosTab> {
                     color: Theme.of(context).hintColor,
                   ),
                 ),
-                items: fileNames
-                    .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(item,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ))))
-                    .toList(),
+                items: filePathes.map((item) {
+                  var short = ' ' + item.split(Platform.pathSeparator).last;
+                  return DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(
+                      short,
+                      style: const TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  );
+                }).toList(),
                 value: selectedValue,
-                onChanged: (value) {
+                onChanged: (path) {
                   setState(() {
-                    selectedValue = value as String;
+                    selectedValue = path as String;
                   });
+                  if (path == null) {
+                    return;
+                  }
+                  Provider.of<ProtoProvider>(
+                    context,
+                    listen: false,
+                  ).change(path as String);
                 },
                 buttonHeight: 40,
                 buttonWidth: 140,
@@ -101,14 +113,11 @@ class _ProtosTabState extends State<ProtosTab> {
                 Dialogue.protoNothingToRemove(context);
                 return;
               }
-              for (var path in filePathes) {
-                if (path.endsWith(selectedValue!.substring(1))) {
-                  Storage.removeProtoPath(path);
-                }
-              }
+              Storage.removeProtoPath(selectedValue!);
               Dialogue.protoRemoved(context);
               selectedValue = null;
               updateProtos();
+              Provider.of<ProtoProvider>(context, listen: false).change('');
             },
             child: Icon(
               Icons.remove_circle_rounded,

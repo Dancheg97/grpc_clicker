@@ -15,13 +15,13 @@ class Grpcurl {
     return false;
   }
 
-  static Future<ProtoServices> parseProto(context, String path) async {
+  static Future<ProtoStructure> parseProto(context, String path) async {
     var callResult = await Process.run(
       'grpcurl',
       ['-import-path', '/', '-proto', path, 'describe'],
     );
     if (callResult.exitCode != 0) {
-      return ProtoServices(callResult.stderr, []);
+      return ProtoStructure(callResult.stderr, []);
     }
     String apiFullName = '';
     List<String> lines = ls.convert("${callResult.stdout}");
@@ -60,7 +60,7 @@ class Grpcurl {
       }
     }
     services.add(currentService);
-    return ProtoServices('', services);
+    return ProtoStructure('', services);
   }
 
   static Future<String> parseMessage(String protoPath, String msgName) async {
@@ -166,10 +166,10 @@ class Grpcurl {
   }
 }
 
-class ProtoServices {
+class ProtoStructure {
   final String error;
   final List<ProtoService> services;
-  ProtoServices(
+  ProtoStructure(
     this.error,
     this.services,
   );

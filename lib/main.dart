@@ -15,6 +15,9 @@ void main() {
       ChangeNotifierProvider(create: (context) {
         return ResponseProvider();
       }),
+      ChangeNotifierProvider(create: (context) {
+        return ProtoProvider();
+      }),
     ],
     child: const MyApp(),
   ));

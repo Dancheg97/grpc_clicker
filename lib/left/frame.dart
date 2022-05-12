@@ -2,6 +2,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/colors.dart';
 import 'package:grpc_rocket/left/protos.dart';
+import 'package:grpc_rocket/left/structure.dart';
 
 class LeftSide extends StatelessWidget {
   const LeftSide({Key? key}) : super(key: key);
@@ -18,11 +19,7 @@ class LeftSide extends StatelessWidget {
               child: MoveWindow(),
             ),
             const ProtosTab(),
-            const Expanded(
-              child: Center(
-                child: Text('navigator'),
-              ),
-            ),
+            const Structure(),
           ],
         ),
       ),

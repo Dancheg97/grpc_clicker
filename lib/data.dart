@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Storage {
@@ -7,16 +5,6 @@ class Storage {
     var prefs = await SharedPreferences.getInstance();
     var protos = prefs.getStringList('protos') ?? [];
     return protos;
-  }
-
-  static Future<List<String>> getProtoFiles() async {
-    var prefs = await SharedPreferences.getInstance();
-    var protos = prefs.getStringList('protos') ?? [];
-    var rez = <String>[];
-    for (var proto in protos) {
-      rez.add(' ' + proto.split(Platform.pathSeparator).last);
-    }
-    return rez;
   }
 
   static void removeProtoPath(String path) async {
