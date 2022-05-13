@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/colors.dart';
-import 'package:grpc_rocket/left/service.dart';
-import 'package:grpc_rocket/providers.dart';
+import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/left/service.dart';
+import 'package:grpc_clicker/providers.dart';
 import 'package:provider/provider.dart';
 
 class StructureTab extends StatefulWidget {

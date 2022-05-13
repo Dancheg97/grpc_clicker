@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/colors.dart';
-import 'package:grpc_rocket/grpcurl.dart';
-import 'package:grpc_rocket/left/method.dart';
+import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/grpcurl.dart';
+import 'package:grpc_clicker/left/method.dart';
 
 class ServiceTab extends StatelessWidget {
   final ProtoService service;

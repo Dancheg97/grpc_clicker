@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:grpc_rocket/colors.dart';
-import 'package:grpc_rocket/left/frame.dart';
-import 'package:grpc_rocket/providers.dart';
-import 'package:grpc_rocket/right/frame.dart';
+import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/left/frame.dart';
+import 'package:grpc_clicker/providers.dart';
+import 'package:grpc_clicker/right/frame.dart';
 import 'package:provider/provider.dart';
 
 void main() {

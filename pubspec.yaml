@@ -1,5 +1,5 @@
-name: grpc_rocket
-description: A new Flutter project.
+name: grpc_clicker
+description: Flutter application fow windows and macos for testing grpc api's.
 
 version: 1.0.0+1
 

@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:grpc_rocket/dialog.dart';
+import 'package:grpc_clicker/dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/colors.dart';
+import 'package:grpc_clicker/colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:grpc_rocket/data.dart';
-import 'package:grpc_rocket/file.dart';
-import 'package:grpc_rocket/grpcurl.dart';
-import 'package:grpc_rocket/providers.dart';
+import 'package:grpc_clicker/data.dart';
+import 'package:grpc_clicker/file.dart';
+import 'package:grpc_clicker/grpcurl.dart';
+import 'package:grpc_clicker/providers.dart';
 import 'package:provider/provider.dart';
 
 class ProtosTab extends StatefulWidget {

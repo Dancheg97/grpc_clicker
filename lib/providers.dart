@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/grpcurl.dart';
-import 'package:grpc_rocket/left/structure.dart';
+import 'package:grpc_clicker/grpcurl.dart';
+import 'package:grpc_clicker/left/structure.dart';
 
 class RequestProvider extends ChangeNotifier {
   late ProtoMethod method = ProtoMethod(

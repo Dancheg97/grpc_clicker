@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:grpc_rocket/colors.dart';
+import 'package:grpc_clicker/colors.dart';
 
 class WindowButtons extends StatelessWidget {
   WindowButtons({Key? key}) : super(key: key);

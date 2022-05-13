@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/colors.dart';
-import 'package:grpc_rocket/data.dart';
+import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/data.dart';
 
 const dialogWidth = 380.0;
 const showCloseIcon = true;
