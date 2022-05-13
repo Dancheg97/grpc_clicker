@@ -1,48 +1,16 @@
-# <p  align="center" style="font-family:courier;font-size:180%" size=212px> gRPC-Clicker </p>
+# grpc_clicker
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-MIT-orange.svg)](LICENSE)
+A new Flutter project.
 
-<p align="center">
-<img align="center" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="138px" height="138px" src="https://cdn-icons-png.flaticon.com/512/762/762658.png" /> 
-</p>
+## Getting Started
 
-gRPC-Clicker is cross-platform application for testing [gRPC](https://grpc.io) API's.
+This project is a starting point for a Flutter application.
 
-Application is built with [flutter](https://flutter.dev), but under the hood it uses [grpcurl](https://github.com/fullstorydev/grpcurl).
+A few resources to get you started if this is your first Flutter project:
 
-To use this application you have to have `grpcurl` installed on your machine, which can be done with command (if you have go language installed):
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-```cmd
-go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
-```
-
-## Installing
-
-1. Download for your [platform](download/)
-2. Unzip
-3. Use
-
-## Using
-
-TODO show example
-
-### Currently supported features:
-
-- Api schema parser
-- Body autofilling
-- Request history
-- Requests as json's
-- Request body caching
-
-### Not supported features:
-
-- gRPC streams
-- complex bodies
-- tests and tests groups
-
-# Dev information
-
-- icons: TODO
-- macos folder setup
-- windows folder setup
-
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
