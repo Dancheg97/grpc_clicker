@@ -91,7 +91,7 @@ class _AdressesTabState extends State<AdressesTab> {
           ),
           ElevatedButton(
             onPressed: () async {
-              await Storage.removeAdress(currentAdress!); //TODO check val
+              await Storage.removeAdress(currentAdress!);
               currentAdress = null;
               updateAdresses();
             },
