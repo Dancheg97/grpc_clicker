@@ -36,7 +36,7 @@ class _AdressesTabState extends State<AdressesTab> {
         children: [
           ElevatedButton(
             onPressed: () async {
-              Dialogue.addAdress(context);
+              await Dialogue.addAdress(context);
               updateAdresses();
             },
             child: Icon(
@@ -91,7 +91,8 @@ class _AdressesTabState extends State<AdressesTab> {
           ),
           ElevatedButton(
             onPressed: () async {
-              Storage.removeAdress(currentAdress!); //TODO check val
+              await Storage.removeAdress(currentAdress!); //TODO check val
+              currentAdress = null;
               updateAdresses();
             },
             child: Icon(

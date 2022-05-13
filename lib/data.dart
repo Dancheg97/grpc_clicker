@@ -31,7 +31,7 @@ class Storage {
     return protos;
   }
 
-  static void removeAdress(String adress) async {
+  static Future removeAdress(String adress) async {
     var prefs = await SharedPreferences.getInstance();
     var protos = prefs.getStringList('adresses') ?? [];
     protos.remove(adress);

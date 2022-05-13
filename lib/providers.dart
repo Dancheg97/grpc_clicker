@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/grpcurl.dart';
+import 'package:grpc_rocket/left/structure.dart';
 
 class RequestProvider extends ChangeNotifier {
-  late String request = '';
-  late String description = '';
-  void change(String newRequest, String newDescription) {
-    request = newRequest;
-    description = newDescription;
+  late ProtoMethod method = ProtoMethod(
+    protoName: '',
+    inMessage: '',
+    outMessage: '',
+    protoPath: '',
+  );
+  late ProtoService service = ProtoService('', '', []);
+  late ProtoStructure structure = ProtoStructure('', []);
+  void change(
+    ProtoMethod curMethod,
+    ProtoService curService,
+    ProtoStructure curStructure,
+  ) {
+    method = curMethod;
+    service = curService;
+    structure = curStructure;
     notifyListeners();
   }
 }

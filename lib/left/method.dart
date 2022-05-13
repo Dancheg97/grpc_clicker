@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_rocket/colors.dart';
 import 'package:grpc_rocket/grpcurl.dart';
+import 'package:grpc_rocket/providers.dart';
+import 'package:provider/provider.dart';
 
 class MethodTab extends StatelessWidget {
   final ProtoMethod method;
@@ -18,7 +20,10 @@ class MethodTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: TextButton(
-        onPressed: () async {},
+        onPressed: () async {
+          Provider.of<RequestProvider>(context, listen: false)
+              .change(method, service, structure);
+        },
         child: SizedBox(
           width: 225,
           child: Row(

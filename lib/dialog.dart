@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc_rocket/colors.dart';
 import 'package:grpc_rocket/data.dart';
 
 const dialogWidth = 380.0;
@@ -114,7 +115,7 @@ class Dialogue {
     ).show();
   }
 
-  static void addAdress(context) async {
+  static Future addAdress(context) async {
     var controller = TextEditingController();
     await AwesomeDialog(
       context: context,
@@ -125,9 +126,10 @@ class Dialogue {
         children: [
           const Text('Enter new adress'),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: controller,
+              cursorColor: Palette.black,
               onEditingComplete: () async {
                 Navigator.pop(context);
                 var err = await Storage.addAdress(controller.text);
@@ -151,8 +153,15 @@ class Dialogue {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Palette.black, width: 0.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Palette.black, width: 0.0),
+                ),
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.upload_rounded),
+                  color: Palette.black,
+                  icon: const Icon(Icons.add_circle_outline_rounded),
                   onPressed: () async {
                     Navigator.pop(context);
                     var err = await Storage.addAdress(controller.text);
