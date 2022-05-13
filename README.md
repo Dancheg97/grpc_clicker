@@ -1,4 +1,4 @@
-# <p  align="center" style="font-family:courier;font-size:180%" size=212px> gRPC-Rocket </p>
+# <p  align="center" style="font-family:courier;font-size:180%" size=212px> gRPC-Clicker </p>
 
 [![Generic badge](https://img.shields.io/badge/LICENSE-MIT-orange.svg)](LICENSE)
 
@@ -6,7 +6,7 @@
 <img align="center" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="138px" height="138px" src="https://cdn-icons-png.flaticon.com/512/762/762658.png" /> 
 </p>
 
-gRPC-Rocket is cross-platform application for testing [gRPC](https://grpc.io) API's.
+gRPC-Clicker is cross-platform application for testing [gRPC](https://grpc.io) API's.
 
 Application is built with [flutter](https://flutter.dev), but under the hood it uses [grpcurl](https://github.com/fullstorydev/grpcurl).
 
@@ -33,7 +33,6 @@ TODO show example
 - Request history
 - Requests as json's
 - Request body caching
-- Request body saving
 
 ### Not supported features:
 
@@ -41,6 +40,9 @@ TODO show example
 - complex bodies
 - tests and tests groups
 
-# TODO
+# Dev information
 
-- add proto requst description to top of sending body
+- icons: TODO
+- macos folder setup
+- windows folder setup
+
