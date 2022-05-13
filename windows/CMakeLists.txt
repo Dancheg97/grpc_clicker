@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(grpc_rocket LANGUAGES CXX)
+project(grpc_clicker LANGUAGES CXX)
 
-set(BINARY_NAME "grpc_rocket")
+set(BINARY_NAME "grpc_clicker")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:grpc_rocket/navigator/frame.dart';
-import 'package:grpc_rocket/providers/request.dart';
-import 'package:grpc_rocket/providers/response.dart';
-import 'package:grpc_rocket/sender/frame.dart';
-import 'package:multi_split_view/multi_split_view.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/left/frame.dart';
+import 'package:grpc_clicker/providers.dart';
+import 'package:grpc_clicker/right/frame.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => RequestNotifier()),
-        ChangeNotifierProvider(create: (context) => ResponseNotifier()),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) {
+        return RequestProvider();
+      }),
+      ChangeNotifierProvider(create: (context) {
+        return ResponseProvider();
+      }),
+      ChangeNotifierProvider(create: (context) {
+        return ProtoProvider();
+      }),
+    ],
+    child: const MyApp(),
+  ));
+  doWhenWindowReady(() {
+    final win = appWindow;
+    const initialSize = Size(900, 650);
+    win.minSize = initialSize;
+    win.size = initialSize;
+    win.alignment = Alignment.center;
+    win.title = "Custom window with Flutter";
+    win.show();
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -24,31 +38,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        dividerTheme: DividerThemeData(
-          color: Colors.blueGrey[200],
-          thickness: 3,
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: MultiSplitViewTheme(
-          data: MultiSplitViewThemeData(
-            dividerPainter: DividerPainters.background(
-              color: Colors.blueGrey[200],
-              highlightedColor: Colors.blueGrey[500],
-            ),
-            dividerThickness: 3,
-          ),
-          child: MultiSplitView(
-            initialAreas: [
-              Area(weight: 0.26, minimalSize: 272),
-              Area(minimalSize: 520),
-            ],
+        body: WindowBorder(
+          color: Palette.black,
+          width: 1,
+          child: Row(
             children: const [
-              NavigatorFrame(),
-              RequstFrame(),
+              LeftSide(),
+              RightSide(),
             ],
           ),
         ),
