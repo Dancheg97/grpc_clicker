@@ -16,7 +16,20 @@ class LeftSide extends StatelessWidget {
         body: Column(
           children: [
             WindowTitleBarBox(
-              child: MoveWindow(),
+              child: MoveWindow(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        indent: 64,
+                        endIndent: 64,
+                        thickness: 1.4,
+                        color: Palette.white,
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
             const ProtosTab(),
             const Expanded(

@@ -17,7 +17,31 @@ class RightSide extends StatelessWidget {
             WindowTitleBarBox(
               child: Row(
                 children: [
-                  Expanded(child: MoveWindow()),
+                  Expanded(
+                    child: MoveWindow(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              indent: 36,
+                              endIndent: 36,
+                              thickness: 1.4,
+                              color: Palette.black,
+                            ),
+                          ),
+                          const Text('gRPC Clicker'),
+                          Expanded(
+                            child: Divider(
+                              indent: 36,
+                              endIndent: 36,
+                              thickness: 1.4,
+                              color: Palette.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   WindowButtons(),
                 ],
               ),
