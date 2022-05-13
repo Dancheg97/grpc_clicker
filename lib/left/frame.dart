@@ -23,7 +23,7 @@ class LeftSide extends StatelessWidget {
                       child: Divider(
                         indent: 64,
                         endIndent: 64,
-                        thickness: 1.4,
+                        thickness: 0.6,
                         color: Palette.white,
                       ),
                     )

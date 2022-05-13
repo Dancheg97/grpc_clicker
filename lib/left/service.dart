@@ -20,32 +20,36 @@ class ServiceTab extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Divider(
-              color: Palette.white,
-              indent: 16,
-              endIndent: 16,
-            ),
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Icon(
-                      Icons.account_tree_rounded,
-                      color: Palette.white,
-                      size: 16,
-                    ),
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    color: Palette.white,
+                    indent: 16,
+                    endIndent: 16,
                   ),
-                  Text(
-                    service.showName,
-                    style: TextStyle(
-                      color: Palette.white,
-                      fontSize: 15,
-                    ),
+                ),
+                Icon(
+                  Icons.account_tree_rounded,
+                  color: Palette.white,
+                  size: 16,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  service.showName,
+                  style: TextStyle(
+                    color: Palette.white,
+                    fontSize: 15,
                   ),
-                ],
-              ),
+                ),
+                Expanded(
+                  child: Divider(
+                    color: Palette.white,
+                    indent: 16,
+                    endIndent: 16,
+                  ),
+                ),
+              ],
             ),
             IntrinsicHeight(
               child: Row(

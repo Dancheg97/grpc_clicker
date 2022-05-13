@@ -25,7 +25,7 @@ class RightSide extends StatelessWidget {
                             child: Divider(
                               indent: 36,
                               endIndent: 36,
-                              thickness: 1.4,
+                              thickness: 0.6,
                               color: Palette.black,
                             ),
                           ),
@@ -34,7 +34,7 @@ class RightSide extends StatelessWidget {
                             child: Divider(
                               indent: 36,
                               endIndent: 36,
-                              thickness: 1.4,
+                              thickness: 0.6,
                               color: Palette.black,
                             ),
                           ),
