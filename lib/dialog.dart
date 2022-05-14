@@ -109,7 +109,7 @@ class Dialogue {
       dialogType: DialogType.ERROR,
       headerAnimationLoop: false,
       title: 'Empty adress!',
-      desc: 'It is impossible to save empty adress.',
+      desc: 'It is impossible to save or remove empty adress.',
       width: dialogWidth,
       showCloseIcon: showCloseIcon,
     ).show();

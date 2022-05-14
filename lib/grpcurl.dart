@@ -96,9 +96,11 @@ class Grpcurl {
       if (line.contains('=') && line.contains(';')) {
         var splitted = line.split(' ');
         if (splitted[2].contains('map')) {
+          var key = splitted[2].replaceAll('map<', '').replaceAll(',', '');
+          var value = splitted[3].replaceAll('>', '');
           fields.fields.add(ProtoField(
             name: splitted[4],
-            type: 'map<TODO, TODO>',
+            type: 'map<$key, $value>',
             fill: '{}',
             optional: false,
           ));
@@ -107,7 +109,7 @@ class Grpcurl {
         if (splitted[2] == 'repeated') {
           fields.fields.add(ProtoField(
             name: splitted[4],
-            type: 'repeated TODO',
+            type: 'repeated ${splitted[3]}',
             fill: '[]',
             optional: false,
           ));
@@ -187,11 +189,11 @@ class Grpcurl {
     return fields;
   }
 
-  static String requestAsJson(Map<String, String> fields) {
+  static String requestAsJson(ProtoFields fields) {
     var resultString = '{\n';
-    fields.forEach((key, value) {
-      resultString += '    ' + key + ': ' + value + ',\n';
-    });
+    for (var field in fields.fields) {
+      resultString += '    "' + field.name + '": ' + field.fill + ',\n';
+    }
     resultString = resultString.substring(0, resultString.length - 2);
     resultString += '\n}';
     return resultString;

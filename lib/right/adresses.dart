@@ -91,6 +91,10 @@ class _AdressesTabState extends State<AdressesTab> {
           ),
           ElevatedButton(
             onPressed: () async {
+              if (currentAdress == null) {
+                Dialogue.adressEmpty(context);
+                return;
+              }
               await Storage.removeAdress(currentAdress!);
               currentAdress = null;
               updateAdresses();
