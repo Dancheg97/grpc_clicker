@@ -95,11 +95,11 @@ class _ProtosTabState extends State<ProtosTab> {
                     selectedValue = path as String;
                   });
                   if (path == null) {
-                    Provider.of<ProtoProvider>(context, listen: false)
-                        .change(ProtoStructure('', []));
+                    Provider.of<ProtoProvider>(context, listen: false).change(
+                        ProtoStructure(path: '', services: [], error: ''));
                     return;
                   }
-                  var proto = await Grpcurl.parseProto(context, path as String);
+                  var proto = await Grpcurl.proto(context, path as String);
                   Provider.of<ProtoProvider>(context, listen: false)
                       .change(proto);
                   if (proto.error != '') {
@@ -123,7 +123,7 @@ class _ProtosTabState extends State<ProtosTab> {
               selectedValue = null;
               updateProtos();
               Provider.of<ProtoProvider>(context, listen: false)
-                  .change(ProtoStructure('', []));
+                  .change(ProtoStructure(path: '', services: [], error: ''));
             },
             child: Icon(
               Icons.remove_circle_rounded,

@@ -15,18 +15,26 @@ class Grpcurl {
     return false;
   }
 
-  static Future<ProtoStructure> parseProto(context, String path) async {
+  static Future<ProtoStructure> proto(context, String path) async {
     var callResult = await Process.run(
       'grpcurl',
       ['-import-path', '/', '-proto', path, 'describe'],
     );
     if (callResult.exitCode != 0) {
-      return ProtoStructure(callResult.stderr, []);
+      return ProtoStructure(
+        path: path,
+        error: callResult.stderr,
+        services: [],
+      );
     }
     String apiFullName = '';
     List<String> lines = ls.convert("${callResult.stdout}");
     List<ProtoService> services = [];
-    ProtoService currentService = ProtoService('', '', []);
+    ProtoService currentService = ProtoService(
+      showName: '',
+      protoName: '',
+      methods: [],
+    );
     for (var line in lines) {
       if (line.endsWith(' is a service:')) {
         apiFullName = line.replaceAll(' is a service:', '');
@@ -39,7 +47,11 @@ class Grpcurl {
         if (currentService.showName != '') {
           services.add(currentService);
         }
-        currentService = ProtoService(name, '$apiFullName$name', []);
+        currentService = ProtoService(
+          showName: name,
+          protoName: '$apiFullName$name',
+          methods: [],
+        );
       }
       if (line.contains('rpc') && line.contains('returns')) {
         currentService.methods.add(ProtoMethod(
@@ -60,40 +72,60 @@ class Grpcurl {
       }
     }
     services.add(currentService);
-    return ProtoStructure('', services);
+    return ProtoStructure(
+      path: path,
+      error: '',
+      services: services,
+    );
   }
 
-  static Future<Map<String, String>> parseMessage(
-      String protoPath, String msgName) async {
-    if (msgName == '.google.protobuf.Empty') {
-      return {};
+  static Future<ProtoFields> message(String proto, String message) async {
+    if (message == '.google.protobuf.Empty') {
+      return ProtoFields(error: '', fields: []);
     }
     var callResult = await Process.run(
       'grpcurl',
-      ['-import-path', '/', '-proto', protoPath, 'describe', msgName],
+      ['-import-path', '/', '-proto', proto, 'describe', message],
     );
     if (callResult.exitCode != 0) {
-      return {};
+      return ProtoFields(error: callResult.stderr, fields: []);
     }
-    Map<String, String> fields = {};
+    var fields = ProtoFields(error: '', fields: []);
     List<String> lines = ls.convert("${callResult.stdout}");
     for (var line in lines) {
       if (line.contains('=') && line.contains(';')) {
         var splitted = line.split(' ');
         if (splitted[2].contains('map')) {
-          fields[_wrapField(splitted[4])] = '{}';
+          fields.fields.add(ProtoField(
+            name: splitted[4],
+            type: 'map<TODO, TODO>',
+            fill: '{}',
+            optional: false,
+          ));
           continue;
         }
         if (splitted[2] == 'repeated') {
-          fields[_wrapField(splitted[4])] = '[]';
+          fields.fields.add(ProtoField(
+            name: splitted[4],
+            type: 'repeated TODO',
+            fill: '[]',
+            optional: false,
+          ));
           continue;
         }
+        var isOptional = false;
         if (splitted[2] == 'optional') {
+          isOptional = true;
           splitted.remove(splitted[2]);
         }
         var type = splitted[2];
         if (type == 'float' || type == 'double') {
-          fields[_wrapField(splitted[3])] = '1.0';
+          fields.fields.add(ProtoField(
+            name: splitted[3],
+            type: type,
+            fill: '1.0',
+            optional: isOptional,
+          ));
           continue;
         }
         var integers = [
@@ -109,22 +141,47 @@ class Grpcurl {
           'sfixed64',
         ];
         if (integers.contains(type)) {
-          fields[_wrapField(splitted[3])] = '1';
+          fields.fields.add(ProtoField(
+            name: splitted[3],
+            type: type,
+            fill: '1',
+            optional: isOptional,
+          ));
           continue;
         }
         if (type == 'bool') {
-          fields[_wrapField(splitted[3])] = 'false';
+          fields.fields.add(ProtoField(
+            name: splitted[3],
+            type: type,
+            fill: 'false',
+            optional: isOptional,
+          ));
           continue;
         }
         if (type == 'string') {
-          fields[_wrapField(splitted[3])] = '"some_string"';
+          fields.fields.add(ProtoField(
+            name: splitted[3],
+            type: type,
+            fill: '"some string"',
+            optional: isOptional,
+          ));
           continue;
         }
         if (type == 'bytes') {
-          fields[_wrapField(splitted[3])] = '"aGVsbG8gd29ybGQ="';
+          fields.fields.add(ProtoField(
+            name: splitted[3],
+            type: type,
+            fill: '"aGVsbG8gd29ybGQ="',
+            optional: isOptional,
+          ));
           continue;
         }
-        fields[_wrapField(splitted[3])] = '"?"';
+        fields.fields.add(ProtoField(
+          name: splitted[3],
+          type: type,
+          fill: '"?"',
+          optional: isOptional,
+        ));
       }
     }
     return fields;
@@ -172,23 +229,25 @@ class Grpcurl {
 }
 
 class ProtoStructure {
-  final String error;
+  final String path;
   final List<ProtoService> services;
-  ProtoStructure(
-    this.error,
-    this.services,
-  );
+  final String error;
+  ProtoStructure({
+    required this.path,
+    required this.services,
+    required this.error,
+  });
 }
 
 class ProtoService {
   final String showName;
   final String protoName;
   List<ProtoMethod> methods;
-  ProtoService(
-    this.showName,
-    this.protoName,
-    this.methods,
-  );
+  ProtoService({
+    required this.showName,
+    required this.protoName,
+    required this.methods,
+  });
 }
 
 class ProtoMethod {
@@ -205,10 +264,32 @@ class ProtoMethod {
 }
 
 class CallResult {
-  final String result;
   final String error;
+  final String result;
   CallResult({
-    required this.result,
     required this.error,
+    required this.result,
+  });
+}
+
+class ProtoFields {
+  final String error;
+  final List<ProtoField> fields;
+  ProtoFields({
+    required this.error,
+    required this.fields,
+  });
+}
+
+class ProtoField {
+  final String name;
+  final String type;
+  final String fill;
+  final bool optional;
+  ProtoField({
+    required this.name,
+    required this.type,
+    required this.fill,
+    required this.optional,
   });
 }

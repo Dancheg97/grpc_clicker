@@ -8,8 +8,16 @@ class RequestProvider extends ChangeNotifier {
     outMessage: '',
     protoPath: '',
   );
-  late ProtoService service = ProtoService('', '', []);
-  late ProtoStructure structure = ProtoStructure('initial', []);
+  late ProtoService service = ProtoService(
+    showName: '',
+    protoName: '',
+    methods: [],
+  );
+  late ProtoStructure structure = ProtoStructure(
+    path: '',
+    error: '',
+    services: [],
+  );
   void change(
     ProtoMethod curMethod,
     ProtoService curService,
@@ -33,7 +41,11 @@ class ResponseProvider extends ChangeNotifier {
 }
 
 class ProtoProvider extends ChangeNotifier {
-  late ProtoStructure structure = ProtoStructure('', []);
+  late ProtoStructure structure = ProtoStructure(
+    path: '',
+    services: [],
+    error: '',
+  );
   void change(ProtoStructure newStructure) {
     structure = newStructure;
     notifyListeners();

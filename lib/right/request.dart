@@ -11,10 +11,11 @@ class RequestTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<RequestProvider>(
       builder: (context, proto, child) {
-        if (proto.structure.error == 'initial') {
+        if (proto.structure.path == '') {
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 377),
             child: Column(
+              key: UniqueKey(),
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
@@ -59,6 +60,10 @@ class RequestTab extends StatelessWidget {
                   ),
                 ),
               ),
+              MessageFieldsTab(
+                protoPath: proto.structure.path,
+                msgName: proto.method.inMessage,
+              ),
             ],
           ),
         );
@@ -70,12 +75,10 @@ class RequestTab extends StatelessWidget {
 class MessageFieldsTab extends StatefulWidget {
   final String protoPath;
   final String msgName;
-  final String protoErr;
   const MessageFieldsTab({
     Key? key,
     required this.protoPath,
     required this.msgName,
-    required this.protoErr,
   }) : super(key: key);
 
   @override
@@ -86,11 +89,11 @@ class _MessageFieldsTabState extends State<MessageFieldsTab> {
   List<Widget> fields = [];
 
   updateFields() async {
-    if (widget.protoErr == 'initial') {
+    if (widget.protoPath == '') {
       fields = [];
+      return;
     }
-    var rez = await Grpcurl.parseMessage(widget.protoPath, widget.msgName);
-    if (rez.isEmpty) {}
+    var rez = await Grpcurl.message(widget.protoPath, widget.msgName);
   }
 
   @override
