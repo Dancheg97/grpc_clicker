@@ -86,14 +86,36 @@ class MessageFieldsTab extends StatefulWidget {
 }
 
 class _MessageFieldsTabState extends State<MessageFieldsTab> {
-  List<Widget> fields = [];
+  var controller = TextEditingController();
+  List<Widget> descriptionFields = [];
 
   updateFields() async {
     if (widget.protoPath == '') {
-      fields = [];
+      descriptionFields = [];
       return;
     }
-    var rez = await Grpcurl.message(widget.protoPath, widget.msgName);
+    var protoFields = await Grpcurl.message(widget.protoPath, widget.msgName);
+    for (var field in protoFields.fields) {
+      var add = '';
+      if (field.optional) {
+        add = ' (optional)';
+      }
+      descriptionFields.add(Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Row(
+          children: [
+            Icon(
+              Icons.album,
+              color: Palette.black,
+              size: 14,
+            ),
+            const SizedBox(width: 6),
+            Text(field.type.split('.').last + ' - ' + field.name + add)
+          ],
+        ),
+      ));
+    }
+    setState(() {});
   }
 
   @override
@@ -104,9 +126,13 @@ class _MessageFieldsTabState extends State<MessageFieldsTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: fields,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: descriptionFields,
+      ),
     );
   }
 }
