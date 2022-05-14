@@ -61,4 +61,17 @@ class Storage {
     var prefs = await SharedPreferences.getInstance();
     return prefs.getString('curAdress') ?? '';
   }
+
+  static void setCurrentRequest(String request)async{
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString('curRequest', request);
+  }
+
+  static Future<String> getCurrentRequest() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('curRequest') ?? '';
+  }
+  
+  // String path,
+  // String method,
 }

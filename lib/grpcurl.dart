@@ -224,10 +224,6 @@ class Grpcurl {
       error: '${sendResult.stderr}',
     );
   }
-
-  static String _wrapField(String field) {
-    return '"' + field + '"';
-  }
 }
 
 class ProtoStructure {
