@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Storage {
@@ -90,5 +92,43 @@ class Storage {
   static Future<String> getCurrentMethod() async {
     var prefs = await SharedPreferences.getInstance();
     return prefs.getString('curMethod') ?? '';
+  }
+}
+
+class RequestParams {
+  late String protoPath;
+  late String requstJson;
+  late String adress;
+  late String protoMethod;
+  late String serviceView;
+  late String methodView;
+  RequestParams({
+    required this.protoPath,
+    required this.requstJson,
+    required this.adress,
+    required this.protoMethod,
+    required this.serviceView,
+    required this.methodView,
+  });
+  RequestParams.fromString(String source) {
+    Map<String, dynamic> json = jsonDecode(source);
+    protoPath = json['protoPath'];
+    requstJson = json['requstJson'];
+    adress = json['adress'];
+    protoMethod = json['protoMethod'];
+    serviceView = json['serviceView'];
+    methodView = json['methodView'];
+  }
+  @override
+  String toString() {
+    Map<String, dynamic> json = {
+      'protoPath': protoPath,
+      'requstJson': requstJson,
+      'adress': adress,
+      'protoMethod': protoMethod,
+      'serviceView': serviceView,
+      'methodView': methodView,
+    };
+    return jsonEncode(json);
   }
 }
