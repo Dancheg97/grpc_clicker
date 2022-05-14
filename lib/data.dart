@@ -62,7 +62,7 @@ class Storage {
     return prefs.getString('curAdress') ?? '';
   }
 
-  static void setCurrentRequest(String request)async{
+  static void setCurrentRequest(String request) async {
     var prefs = await SharedPreferences.getInstance();
     prefs.setString('curRequest', request);
   }
@@ -71,7 +71,24 @@ class Storage {
     var prefs = await SharedPreferences.getInstance();
     return prefs.getString('curRequest') ?? '';
   }
-  
-  // String path,
-  // String method,
+
+  static void setCurrentPath(String path) async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString('curPath', path);
+  }
+
+  static Future<String> getCurrentPath() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('curPath') ?? '';
+  }
+
+  static void setCurrentMethod(String path) async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString('curMethod', path);
+  }
+
+  static Future<String> getCurrentMethod() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('curMethod') ?? '';
+  }
 }

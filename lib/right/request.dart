@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/data.dart';
 import 'package:grpc_clicker/grpcurl.dart';
 import 'package:grpc_clicker/providers.dart';
 import 'package:provider/provider.dart';
@@ -89,7 +90,7 @@ class RequestTab extends StatelessWidget {
                         ),
                       ),
                       onChanged: (text) async {
-                        
+                        Storage.setCurrentRequest(text);
                       },
                     ),
                   ),

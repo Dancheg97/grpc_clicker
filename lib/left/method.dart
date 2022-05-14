@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grpc_clicker/colors.dart';
+import 'package:grpc_clicker/data.dart';
 import 'package:grpc_clicker/grpcurl.dart';
 import 'package:grpc_clicker/providers.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,8 @@ class MethodTab extends StatelessWidget {
         onPressed: () async {
           Provider.of<RequestProvider>(context, listen: false)
               .change(method, service, structure);
+          Storage.setCurrentMethod(method.protoName);
+          Storage.setCurrentPath(structure.path);
         },
         child: SizedBox(
           width: 225,

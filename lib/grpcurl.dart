@@ -291,3 +291,20 @@ class ProtoField {
     required this.optional,
   });
 }
+
+class RequestParams {
+  final String protoPath;
+  final String requstJson;
+  final String adress;
+  final String protoMethod;
+  final String serviceView;
+  final String methodView;
+  RequestParams({
+    required this.protoPath,
+    required this.requstJson,
+    required this.adress,
+    required this.protoMethod,
+    required this.serviceView,
+    required this.methodView,
+  });
+}
