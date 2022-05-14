@@ -48,6 +48,11 @@ class RightSide extends StatelessWidget {
               ),
             ),
             const AdressesTab(),
+            Divider(
+              color: Palette.black,
+              indent: 32,
+              endIndent: 32,
+            ),
             Expanded(
               child: IntrinsicHeight(
                 child: Row(

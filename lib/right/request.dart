@@ -39,11 +39,6 @@ class RequestTab extends StatelessWidget {
             key: UniqueKey(),
             child: Column(
               children: [
-                Divider(
-                  color: Palette.black,
-                  indent: 32,
-                  endIndent: 32,
-                ),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
