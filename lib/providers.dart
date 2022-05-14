@@ -27,16 +27,13 @@ class RequestProvider extends ChangeNotifier {
     service = curService;
     structure = curStructure;
     notifyListeners();
-    
   }
 }
 
 class ResponseProvider extends ChangeNotifier {
-  late String resp = '';
-  late String error = '';
-  void change(String newResponse, String newErr) {
-    resp = newResponse;
-    error = newErr;
+  late Response response = Response(error: '', result: '');
+  void change(Response newResponse) {
+    response = newResponse;
     notifyListeners();
   }
 }

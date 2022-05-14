@@ -150,6 +150,7 @@ class _MessageFieldsTabState extends State<MessageFieldsTab> {
     }
     widget.controller.text = Grpcurl.json(protoFields);
     setState(() {});
+    Storage.setCurrentRequest(widget.controller.text);
   }
 
   @override

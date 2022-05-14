@@ -24,7 +24,7 @@ class MethodTab extends StatelessWidget {
         onPressed: () async {
           Provider.of<RequestProvider>(context, listen: false)
               .change(method, service, structure);
-          Storage.setCurrentMethod(method.protoName);
+          Storage.setCurrentMethod(service.protoName+'/'+method.protoName);
           Storage.setCurrentPath(structure.path);
         },
         child: SizedBox(

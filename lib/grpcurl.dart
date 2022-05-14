@@ -49,7 +49,7 @@ class Grpcurl {
         }
         currentService = ProtoService(
           showName: name,
-          protoName: '$apiFullName$name',
+          protoName: '$apiFullName.$name',
           methods: [],
         );
       }
@@ -199,12 +199,12 @@ class Grpcurl {
     return resultString;
   }
 
-  static Future<CallResult> sendRequest(
-    String path,
-    String req,
-    String adress,
-    String method,
-  ) async {
+  static Future<Response> sendRequest({
+    required String path,
+    required String req,
+    required String adress,
+    required String method,
+  }) async {
     var sendResult = await Process.run(
       'grpcurl',
       [
@@ -219,7 +219,7 @@ class Grpcurl {
         method
       ],
     );
-    return CallResult(
+    return Response(
       result: '${sendResult.stdout}',
       error: '${sendResult.stderr}',
     );
@@ -261,10 +261,10 @@ class ProtoMethod {
   });
 }
 
-class CallResult {
+class Response {
   final String error;
   final String result;
-  CallResult({
+  Response({
     required this.error,
     required this.result,
   });
