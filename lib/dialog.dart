@@ -130,33 +130,15 @@ class Dialogue {
             child: TextField(
               controller: controller,
               cursorColor: Palette.black,
-              onEditingComplete: () async {
-                Navigator.pop(context);
-                var err = await Storage.addAdress(controller.text);
-                if (err == 'exists') {
-                  adressExists(context);
-                  return;
-                }
-                if (err == 'nothing') {
-                  adressEmpty(context);
-                  return;
-                }
-                if (err != '') {
-                  adressEmpty(context);
-                  return;
-                }
-                adressSaved(context);
-              },
               decoration: InputDecoration(
                 hintText: 'rpc adress',
                 contentPadding: const EdgeInsets.all(15),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
                 enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: Palette.black, width: 0.0),
                 ),
                 focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: Palette.black, width: 0.0),
                 ),
                 suffixIcon: IconButton(
@@ -181,6 +163,23 @@ class Dialogue {
                   },
                 ),
               ),
+              onEditingComplete: () async {
+                Navigator.pop(context);
+                var err = await Storage.addAdress(controller.text);
+                if (err == 'exists') {
+                  adressExists(context);
+                  return;
+                }
+                if (err == 'nothing') {
+                  adressEmpty(context);
+                  return;
+                }
+                if (err != '') {
+                  adressEmpty(context);
+                  return;
+                }
+                adressSaved(context);
+              },
             ),
           ),
         ],

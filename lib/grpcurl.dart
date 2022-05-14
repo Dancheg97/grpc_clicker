@@ -189,7 +189,7 @@ class Grpcurl {
     return fields;
   }
 
-  static String requestAsJson(ProtoFields fields) {
+  static String json(ProtoFields fields) {
     var resultString = '{\n';
     for (var field in fields.fields) {
       resultString += '    "' + field.name + '": ' + field.fill + ',\n';
