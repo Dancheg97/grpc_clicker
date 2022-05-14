@@ -16,7 +16,6 @@ class SendButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
           child: TextButton(
-            onPressed: () {},
             child: SizedBox(
               width: 32,
               height: double.infinity,
@@ -26,6 +25,9 @@ class SendButton extends StatelessWidget {
                 size: 32,
               ),
             ),
+            onPressed: () async {
+              
+            },
           ),
         ),
       ),

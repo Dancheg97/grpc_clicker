@@ -82,6 +82,7 @@ class _AdressesTabState extends State<AdressesTab> {
                   setState(() {
                     currentAdress = path as String;
                   });
+                  Storage.setCurrentAdress(path as String);
                 },
                 buttonHeight: 40,
                 buttonWidth: 140,

@@ -27,6 +27,7 @@ class RequestProvider extends ChangeNotifier {
     service = curService;
     structure = curStructure;
     notifyListeners();
+    
   }
 }
 

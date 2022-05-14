@@ -51,4 +51,14 @@ class Storage {
     prefs.setStringList('adresses', adresses);
     return '';
   }
+
+  static void setCurrentAdress(String adress) async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString('curAdress', adress);
+  }
+
+  static Future<String> getCurrentAdress() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('curAdress') ?? '';
+  }
 }
