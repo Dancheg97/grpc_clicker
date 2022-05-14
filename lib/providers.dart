@@ -9,7 +9,7 @@ class RequestProvider extends ChangeNotifier {
     protoPath: '',
   );
   late ProtoService service = ProtoService('', '', []);
-  late ProtoStructure structure = ProtoStructure('', []);
+  late ProtoStructure structure = ProtoStructure('initial', []);
   void change(
     ProtoMethod curMethod,
     ProtoService curService,

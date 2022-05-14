@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:grpc_clicker/colors.dart';
 import 'package:grpc_clicker/right/adresses.dart';
+import 'package:grpc_clicker/right/request.dart';
+import 'package:grpc_clicker/right/response.dart';
+import 'package:grpc_clicker/right/send.dart';
 import 'package:grpc_clicker/right/winbuttons.dart';
 
 class RightSide extends StatelessWidget {
@@ -47,9 +50,19 @@ class RightSide extends StatelessWidget {
               ),
             ),
             const AdressesTab(),
-            const Expanded(
-              child: Center(
-                child: Text('right side'),
+            Expanded(
+              child: IntrinsicHeight(
+                child: Row(
+                  children: const [
+                    Expanded(
+                      child: RequestTab(),
+                    ),
+                    SendButton(),
+                    Expanded(
+                      child: ResponseTab(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

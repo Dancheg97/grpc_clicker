@@ -63,16 +63,17 @@ class Grpcurl {
     return ProtoStructure('', services);
   }
 
-  static Future<String> parseMessage(String protoPath, String msgName) async {
+  static Future<Map<String, String>> parseMessage(
+      String protoPath, String msgName) async {
     if (msgName == '.google.protobuf.Empty') {
-      return '';
+      return {};
     }
     var callResult = await Process.run(
       'grpcurl',
       ['-import-path', '/', '-proto', protoPath, 'describe', msgName],
     );
     if (callResult.exitCode != 0) {
-      return '';
+      return {};
     }
     Map<String, String> fields = {};
     List<String> lines = ls.convert("${callResult.stdout}");
@@ -126,6 +127,10 @@ class Grpcurl {
         fields[_wrapField(splitted[3])] = '"?"';
       }
     }
+    return fields;
+  }
+
+  static String requestAsJson(Map<String, String> fields) {
     var resultString = '{\n';
     fields.forEach((key, value) {
       resultString += '    ' + key + ': ' + value + ',\n';
