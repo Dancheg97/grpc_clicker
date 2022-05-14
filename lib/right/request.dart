@@ -105,9 +105,9 @@ class _MessageFieldsTabState extends State<MessageFieldsTab> {
         child: Row(
           children: [
             Icon(
-              Icons.album,
+              Icons.circle,
               color: Palette.black,
-              size: 14,
+              size: 11,
             ),
             const SizedBox(width: 6),
             Text(field.type.split('.').last + ' - ' + field.name + add)
@@ -118,22 +118,24 @@ class _MessageFieldsTabState extends State<MessageFieldsTab> {
     controller.text = Grpcurl.json(protoFields);
     descriptionFields.add(Padding(
       padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-      child: TextField(
-        // expands: true,
-        maxLines: null,
-        controller: controller,
-        keyboardType: TextInputType.multiline,
-        cursorColor: Palette.black,
-        decoration: InputDecoration(
-          hintText: 'gRPC request',
-          contentPadding: const EdgeInsets.all(15),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Palette.black, width: 0.0),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Palette.black, width: 0.0),
+      child: SizedBox(
+        child: TextField(
+          expands: true,
+          maxLines: null,
+          controller: controller,
+          keyboardType: TextInputType.multiline,
+          cursorColor: Palette.black,
+          decoration: InputDecoration(
+            hintText: 'gRPC request',
+            contentPadding: const EdgeInsets.all(15),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Palette.black, width: 0.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Palette.black, width: 0.0),
+            ),
           ),
         ),
       ),
