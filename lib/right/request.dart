@@ -14,57 +14,90 @@ class RequestTab extends StatelessWidget {
         if (proto.structure.path == '') {
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 377),
-            child: Column(
+            child: Expanded(
               key: UniqueKey(),
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.album_outlined,
-                  color: Palette.blackQ,
-                  size: 72,
-                ),
-                const Text(
-                  'select message',
-                ),
-              ],
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.album_outlined,
+                    color: Palette.blackQ,
+                    size: 72,
+                  ),
+                  const Text(
+                    'select message',
+                  ),
+                ],
+              ),
             ),
           );
         }
+        var controller = TextEditingController();
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 377),
-          child: Column(
+          child: Expanded(
             key: UniqueKey(),
-            children: [
-              Divider(
-                color: Palette.black,
-                indent: 32,
-                endIndent: 32,
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.language_rounded,
-                        size: 16,
-                        color: Palette.black,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        proto.method.inMessage.split('.').last,
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                    ],
+            child: Column(
+              children: [
+                Divider(
+                  color: Palette.black,
+                  indent: 32,
+                  endIndent: 32,
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.language_rounded,
+                          size: 16,
+                          color: Palette.black,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          proto.method.inMessage.split('.').last,
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              MessageFieldsTab(
-                protoPath: proto.structure.path,
-                msgName: proto.method.inMessage,
-              ),
-            ],
+                MessageFieldsTab(
+                  protoPath: proto.structure.path,
+                  msgName: proto.method.inMessage,
+                  controller: controller,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      expands: true,
+                      maxLines: null,
+                      controller: controller,
+                      keyboardType: TextInputType.multiline,
+                      textAlignVertical: TextAlignVertical.top,
+                      cursorColor: Palette.black,
+                      decoration: InputDecoration(
+                        hintText: 'gRPC request',
+                        contentPadding: const EdgeInsets.all(15),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              BorderSide(color: Palette.black, width: 0.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              BorderSide(color: Palette.black, width: 0.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -75,10 +108,12 @@ class RequestTab extends StatelessWidget {
 class MessageFieldsTab extends StatefulWidget {
   final String protoPath;
   final String msgName;
+  final TextEditingController controller;
   const MessageFieldsTab({
     Key? key,
     required this.protoPath,
     required this.msgName,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -86,7 +121,6 @@ class MessageFieldsTab extends StatefulWidget {
 }
 
 class _MessageFieldsTabState extends State<MessageFieldsTab> {
-  var controller = TextEditingController();
   List<Widget> descriptionFields = [];
 
   updateFields() async {
@@ -115,31 +149,7 @@ class _MessageFieldsTabState extends State<MessageFieldsTab> {
         ),
       ));
     }
-    controller.text = Grpcurl.json(protoFields);
-    descriptionFields.add(Padding(
-      padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-      child: SizedBox(
-        child: TextField(
-          expands: true,
-          maxLines: null,
-          controller: controller,
-          keyboardType: TextInputType.multiline,
-          cursorColor: Palette.black,
-          decoration: InputDecoration(
-            hintText: 'gRPC request',
-            contentPadding: const EdgeInsets.all(15),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Palette.black, width: 0.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Palette.black, width: 0.0),
-            ),
-          ),
-        ),
-      ),
-    ));
+    widget.controller.text = Grpcurl.json(protoFields);
     setState(() {});
   }
 
