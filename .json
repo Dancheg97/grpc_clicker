@@ -1,0 +1,6 @@
+{
+  "title": "some string",
+  "nested": {
+    "title": "inner"
+  }
+}

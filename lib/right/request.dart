@@ -15,88 +15,84 @@ class RequestTab extends StatelessWidget {
         if (proto.structure.path == '') {
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 377),
-            child: Expanded(
+            child: Column(
               key: UniqueKey(),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.album_outlined,
-                    color: Palette.blackQ,
-                    size: 72,
-                  ),
-                  const Text(
-                    'select message',
-                  ),
-                ],
-              ),
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.album_outlined,
+                  color: Palette.blackQ,
+                  size: 72,
+                ),
+                const Text(
+                  'select message',
+                ),
+              ],
             ),
           );
         }
         var controller = TextEditingController();
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 377),
-          child: Expanded(
+          child: Column(
             key: UniqueKey(),
-            child: Column(
-              children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.language_rounded,
-                          size: 16,
-                          color: Palette.black,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          proto.method.inMessage.split('.').last,
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                MessageFieldsTab(
-                  protoPath: proto.structure.path,
-                  msgName: proto.method.inMessage,
-                  controller: controller,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextField(
-                      expands: true,
-                      maxLines: null,
-                      controller: controller,
-                      keyboardType: TextInputType.multiline,
-                      textAlignVertical: TextAlignVertical.top,
-                      cursorColor: Palette.black,
-                      decoration: InputDecoration(
-                        hintText: 'gRPC request',
-                        contentPadding: const EdgeInsets.all(15),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              BorderSide(color: Palette.black, width: 0.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide:
-                              BorderSide(color: Palette.black, width: 0.0),
-                        ),
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.language_rounded,
+                        size: 16,
+                        color: Palette.black,
                       ),
-                      onChanged: (text) async {
-                        Storage.setCurrentRequest(text);
-                      },
-                    ),
+                      const SizedBox(width: 4),
+                      Text(
+                        proto.method.inMessage.split('.').last,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              MessageFieldsTab(
+                protoPath: proto.structure.path,
+                msgName: proto.method.inMessage,
+                controller: controller,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    expands: true,
+                    maxLines: null,
+                    controller: controller,
+                    keyboardType: TextInputType.multiline,
+                    textAlignVertical: TextAlignVertical.top,
+                    cursorColor: Palette.black,
+                    decoration: InputDecoration(
+                      hintText: 'gRPC request',
+                      contentPadding: const EdgeInsets.all(15),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide:
+                            BorderSide(color: Palette.black, width: 0.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide:
+                            BorderSide(color: Palette.black, width: 0.0),
+                      ),
+                    ),
+                    onChanged: (text) async {
+                      Storage.setCurrentRequest(text);
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
