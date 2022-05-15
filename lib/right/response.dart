@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc_clicker/colors.dart';
 import 'package:grpc_clicker/providers.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ResponseTab extends StatelessWidget {
   const ResponseTab({Key? key}) : super(key: key);
@@ -10,6 +11,23 @@ class ResponseTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ResponseProvider>(
       builder: (context, response, child) {
+        if (response.response.error == 'wait') {
+          return AnimatedSwitcher(
+            switchInCurve: Curves.ease,
+            duration: const Duration(milliseconds: 377),
+            child: Column(
+              key: UniqueKey(),
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SpinKitSpinningLines(
+                  size: 72,
+                  color: Palette.black,
+                ),
+                const Text('processing'),
+              ],
+            ),
+          );
+        }
         if (response.response.error == '' && response.response.result == '') {
           return AnimatedSwitcher(
             switchInCurve: Curves.ease,
@@ -23,9 +41,7 @@ class ResponseTab extends StatelessWidget {
                   color: Palette.blackQ,
                   size: 72,
                 ),
-                const Text(
-                  'gRPC response',
-                ),
+                const Text('gRPC response'),
               ],
             ),
           );

@@ -30,6 +30,8 @@ class SendButton extends StatelessWidget {
               ),
             ),
             onPressed: () async {
+              Provider.of<ResponseProvider>(context, listen: false)
+                  .change(Response(error: 'wait', result: ''));
               var response = await Grpcurl.sendRequest(
                 path: await Storage.getCurrentPath(),
                 req: await Storage.getCurrentRequest(),
