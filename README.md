@@ -20,7 +20,7 @@ Downloads can be found for different platforms over here: [downloads](download/)
 
 Currently supported platforms:
 - *Windows*
-- *Macos*
+- *Macos* (first launch on macos should be done with terminal to avoid crashes)
 
 ## Usage
 
@@ -32,6 +32,8 @@ Currently supported platforms:
    ![](example/3.png)
 4. Make a call:
    ![](example/4.png)
+
+---
 
 ### Currently supported features:
 
