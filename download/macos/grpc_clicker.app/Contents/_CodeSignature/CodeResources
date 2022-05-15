@@ -6,11 +6,11 @@
 	<dict>
 		<key>Resources/AppIcon.icns</key>
 		<data>
-		H4osk2kAsQW0CEQ3FVPjpzwY8+I=
+		2ZjadQD22yK5m4+oJKSFlpfL9go=
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		B5u72sZJP3HPlyVzQk8OuXmENi0=
+		vZzrMjIVz28nqNB3TBn5B9mZsDw=
 		</data>
 		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects-101300.nib</key>
 		<data>
@@ -198,31 +198,31 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Jwj9SWF+khkds37Ix5aVMo53RQk=
+			DiWEdVH129A93XoxBSQxv++uOCs=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"9e39d10cc491e2428d0899699ac04ccb7980a42b" or cdhash H"2708fd49617e92191db37ec8c79695328e774509"</string>
+			<string>cdhash H"894157e24064fbe87c4626cbf38ed0afc68057de" or cdhash H"0e25847551f5dbd03ddd7a31052431bfefae382b"</string>
 		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			H4osk2kAsQW0CEQ3FVPjpzwY8+I=
+			2ZjadQD22yK5m4+oJKSFlpfL9go=
 			</data>
 			<key>hash2</key>
 			<data>
-			cNOcZfJM7nFaHVMl7JL0QphD9rVYByn+3XIjcLCBwIE=
+			qyIhcnp4mfJymgFjs6hsx9jG+COk4dz8xPSQdykrZ4c=
 			</data>
 		</dict>
 		<key>Resources/Assets.car</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			B5u72sZJP3HPlyVzQk8OuXmENi0=
+			vZzrMjIVz28nqNB3TBn5B9mZsDw=
 			</data>
 			<key>hash2</key>
 			<data>
-			R9DojzQXwBKTIiyexFapDzuaQrWqC4P8CbKQO+tEEDU=
+			hJu70yoZJRjoIlzWks8rIAQA84jgCoF0Znsm2MbJzb4=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects-101300.nib</key>
