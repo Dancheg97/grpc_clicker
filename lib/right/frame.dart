@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:grpc_clicker/colors.dart';
@@ -12,6 +14,10 @@ class RightSide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget widget = Container();
+    if (Platform.isWindows) {
+      widget = const SizedBox(width: 128);
+    }
     return Expanded(
       child: Container(
         color: Palette.white,
@@ -24,6 +30,7 @@ class RightSide extends StatelessWidget {
                     child: MoveWindow(
                       child: Row(
                         children: [
+                          widget,
                           Expanded(
                             child: Divider(
                               indent: 36,
