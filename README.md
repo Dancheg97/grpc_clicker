@@ -1,16 +1,53 @@
-# grpc_clicker
+# gRPC Clicker
 
-A new Flutter project.
+<p align="center">
+<img align="center" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="138px" height="138px" src="icon.png" /> 
+</p>
 
-## Getting Started
+gRPC-Clicker is cross-platform application for testing [gRPC](https://grpc.io) API's.
 
-This project is a starting point for a Flutter application.
+Application is built with [flutter](https://flutter.dev), but under the hood it uses [grpcurl](https://github.com/fullstorydev/grpcurl).
 
-A few resources to get you started if this is your first Flutter project:
+To use this application you have to have `grpcurl` installed on your machine, which can be done with command (if you have go installed):
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```cmd
+go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Downloads
+
+Downloads can be found for different platforms over here: [downloads](download/)
+
+Currently supported platforms:
+- *Windows*
+- *Macos* (first launch on macos should be done with terminal to avoid crashes)
+
+## Usage
+
+1. Add your proto file:
+   ![](example/1.png)
+2. Select message to invoke, fill the params as `json`:
+   ![](example/2.png)
+3. Add adress:
+   ![](example/3.png)
+4. Make a call:
+   ![](example/4.png)
+
+---
+
+### Currently supported features:
+
+- Api schema parser
+- Body autofilling
+- Requests as json's
+- Send request and get responses
+
+### To be supported features:
+
+- add support for *linux*
+- gRPC streams
+- Request history
+- complex bodies
+- tests and tests groups
+- Request body caching
+- Request body saving
