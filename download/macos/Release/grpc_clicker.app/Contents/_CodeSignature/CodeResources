@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		OqnTY73HEvR46vjVeQb3415JOGw=
+		bFVmoTOkPwyfvIpMLFLfNViJAfM=
 		</data>
 		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects-101300.nib</key>
 		<data>
@@ -198,10 +198,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			mTjXVK10bw7fYIAOt3Q3BlzGfzI=
+			bB5aju2MTi6HAuHmIaBYO4K3gNc=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"92fca4d884e20beb4f1ed0d2fefdb112623c9ae0" or cdhash H"9938d754ad746f0edf60800eb77437065cc67f32"</string>
+			<string>cdhash H"a7fb1052cde66a09b59f4e182e45197d0d9c73de" or cdhash H"6c1e5a8eed8c4e2e8702e1e621a0583b82b780d7"</string>
 		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
@@ -218,11 +218,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OqnTY73HEvR46vjVeQb3415JOGw=
+			bFVmoTOkPwyfvIpMLFLfNViJAfM=
 			</data>
 			<key>hash2</key>
 			<data>
-			6Ri13LpzYlFNXuCv+pddDN98GA68GH6KOUqBFEk9/Lk=
+			ZTA1sYQ2aNq/6H/ens+7cm+b9smsncXgvWfrSDb8INk=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/MainMenu.nib/keyedobjects-101300.nib</key>
