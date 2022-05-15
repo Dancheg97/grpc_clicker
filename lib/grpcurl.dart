@@ -39,7 +39,9 @@ class Grpcurl {
       if (line.endsWith(' is a service:')) {
         apiFullName = line.replaceAll(' is a service:', '');
         if (apiFullName.contains('.')) {
-          apiFullName = apiFullName.split('.')[0];
+          var splitted = apiFullName.split('.');
+          splitted.remove(splitted.last);
+          apiFullName = splitted.join('.');
         }
       }
       if (line.contains('service') && line.contains('{')) {
