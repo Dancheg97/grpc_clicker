@@ -86,7 +86,7 @@ class ResponseTab extends StatelessWidget {
                       textAlignVertical: TextAlignVertical.top,
                       cursorColor: Palette.black,
                       decoration: InputDecoration(
-                        hintText: 'gRPC request',
+                        hintText: 'gRPC response',
                         contentPadding: const EdgeInsets.all(15),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),

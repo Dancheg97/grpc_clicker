@@ -5,6 +5,8 @@ import 'package:grpc_clicker/grpcurl.dart';
 import 'package:grpc_clicker/providers.dart';
 import 'package:provider/provider.dart';
 
+var processing = false;
+
 class SendButton extends StatelessWidget {
   const SendButton({Key? key}) : super(key: key);
 
@@ -30,6 +32,10 @@ class SendButton extends StatelessWidget {
               ),
             ),
             onPressed: () async {
+              if (processing) {
+                return;
+              }
+              processing = true;
               Provider.of<ResponseProvider>(context, listen: false)
                   .change(Response(error: 'wait', result: ''));
               var response = await Grpcurl.sendRequest(
@@ -40,6 +46,7 @@ class SendButton extends StatelessWidget {
               );
               Provider.of<ResponseProvider>(context, listen: false)
                   .change(response);
+              processing = false;
             },
           ),
         ),
