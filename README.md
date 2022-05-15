@@ -22,7 +22,7 @@ Currently supported platforms:
 - *Windows*
 - *Macos*
 
-## Using
+## Usage
 
 1. Add your proto file:
    ![](example/1.png)
